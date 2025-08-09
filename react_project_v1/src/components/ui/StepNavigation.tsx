@@ -15,7 +15,7 @@ export function StepNavigation({
 }: StepNavigationProps) {
   const handleStepClick = (stepIndex: number) => {
     if (!allowStepNavigation || !onStepClick) return;
-    
+
     // Only allow navigation to visited steps or the next immediate step
     if (visitedSteps.has(stepIndex) || stepIndex === currentStep + 1) {
       onStepClick(stepIndex);
@@ -41,7 +41,7 @@ export function StepNavigation({
           {steps.map((step, index) => {
             const status = getStepStatus(index);
             const isClickable = isStepClickable(index);
-            
+
             return (
               <li key={step.id} className="relative flex-1">
                 <div className="flex items-center">
@@ -56,7 +56,7 @@ export function StepNavigation({
                       style={{ zIndex: -1 }}
                     />
                   )}
-                  
+
                   {/* Step button */}
                   <button
                     type="button"
@@ -138,7 +138,7 @@ export function ProgressIndicator({
         <span>Step {currentStep + 1} of {totalSteps}</span>
         <span>{Math.round(completedProgress)}% Complete</span>
       </div>
-      
+
       <div className="w-full bg-gray-200 rounded-full h-2">
         <div className="flex h-full rounded-full overflow-hidden">
           {/* Completed progress */}
@@ -153,7 +153,7 @@ export function ProgressIndicator({
           />
         </div>
       </div>
-      
+
       <div className="flex justify-between text-xs text-gray-500 mt-1">
         <span>{completedSteps.size} completed</span>
         <span>{totalSteps - completedSteps.size - 1} remaining</span>
@@ -225,7 +225,7 @@ export function MobileStepNavigation({
             </div>
           )}
         </div>
-        
+
         <div className="ml-4">
           <div className="flex space-x-1">
             {Array.from({ length: totalSteps }, (_, index) => (

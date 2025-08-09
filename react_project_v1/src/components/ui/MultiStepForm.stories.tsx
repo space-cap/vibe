@@ -12,23 +12,23 @@ interface UserRegistrationData {
   email: string;
   phone: string;
   birthDate: string;
-  
+
   // Account Details
   username: string;
   password: string;
   confirmPassword: string;
   accountType: 'personal' | 'business';
-  
+
   // Business Information (conditional)
   companyName?: string;
   companySize?: string;
   industry?: string;
-  
+
   // Preferences
   newsletter: boolean;
   notifications: string[];
   theme: 'light' | 'dark' | 'auto';
-  
+
   // Payment (if business)
   paymentMethod?: 'credit' | 'debit' | 'bank';
   cardNumber?: string;
@@ -301,8 +301,8 @@ const registrationSteps: FormStep<UserRegistrationData>[] = [
         required: true,
         gridSpan: 12,
         conditionalLogic: {
-          showWhen: (data) => 
-            data.accountType === 'business' && 
+          showWhen: (data) =>
+            data.accountType === 'business' &&
             (data.paymentMethod === 'credit' || data.paymentMethod === 'debit'),
         },
       },
@@ -314,8 +314,8 @@ const registrationSteps: FormStep<UserRegistrationData>[] = [
         required: true,
         gridSpan: 6,
         conditionalLogic: {
-          showWhen: (data) => 
-            data.accountType === 'business' && 
+          showWhen: (data) =>
+            data.accountType === 'business' &&
             (data.paymentMethod === 'credit' || data.paymentMethod === 'debit'),
         },
       },
@@ -327,8 +327,8 @@ const registrationSteps: FormStep<UserRegistrationData>[] = [
         required: true,
         gridSpan: 6,
         conditionalLogic: {
-          showWhen: (data) => 
-            data.accountType === 'business' && 
+          showWhen: (data) =>
+            data.accountType === 'business' &&
             (data.paymentMethod === 'credit' || data.paymentMethod === 'debit'),
         },
       },

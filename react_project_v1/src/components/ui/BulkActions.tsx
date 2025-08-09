@@ -47,7 +47,7 @@ export function BulkActions<T = any>({
             <span className="font-medium">{selectedCount}</span> of{' '}
             <span className="font-medium">{totalCount}</span> items selected
           </div>
-          
+
           <button
             onClick={onClearSelection}
             className="text-sm text-blue-600 hover:text-blue-500 underline"
@@ -95,7 +95,7 @@ export function BulkActions<T = any>({
                 <div className="py-1" role="menu">
                   {bulkActions.map((action) => {
                     const isDisabled = action.disabled?.(selectedRows) || executingAction !== null;
-                    
+
                     return (
                       <button
                         key={action.id}

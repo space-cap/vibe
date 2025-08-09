@@ -67,7 +67,7 @@ export function useMultiStepForm<TFormData extends FieldValues = FieldValues>({
     currentStep,
     completedSteps,
     visitedSteps,
-    isValid: steps.every((step, index) => 
+    isValid: steps.every((step, index) =>
       index > currentStep || isStepValid(formData, step)
     ),
     isDirty: form.formState.isDirty,
@@ -107,7 +107,7 @@ export function useMultiStepForm<TFormData extends FieldValues = FieldValues>({
     }
 
     const result = validateStepData(formData, currentStepConfig.schema);
-    
+
     // Trigger form validation for the current step fields
     const stepFieldNames = currentStepConfig.fields.map(field => field.name);
     await trigger(stepFieldNames);
@@ -141,11 +141,11 @@ export function useMultiStepForm<TFormData extends FieldValues = FieldValues>({
 
   const goToStep = useCallback((stepIndex: number) => {
     if (stepIndex < 0 || stepIndex >= totalSteps) return;
-    
+
     const previousStep = currentStep;
     setCurrentStep(stepIndex);
     setVisitedSteps(prev => new Set([...prev, stepIndex]));
-    
+
     const direction: FormDirection = stepIndex > previousStep ? 'next' : 'previous';
     onStepChange?.(stepIndex, direction);
   }, [currentStep, totalSteps, onStepChange]);
@@ -157,7 +157,7 @@ export function useMultiStepForm<TFormData extends FieldValues = FieldValues>({
     }
 
     const currentStepConfig = steps[currentStep];
-    
+
     try {
       // Call step's onNext handler if it exists
       if (currentStepConfig.onNext) {
@@ -173,7 +173,7 @@ export function useMultiStepForm<TFormData extends FieldValues = FieldValues>({
         goToStep(nextStepIndex);
         return true;
       }
-      
+
       return false;
     } catch (error) {
       console.error('Error in step onNext handler:', error);
@@ -183,7 +183,7 @@ export function useMultiStepForm<TFormData extends FieldValues = FieldValues>({
 
   const previousStep = useCallback(async () => {
     const currentStepConfig = steps[currentStep];
-    
+
     try {
       // Call step's onPrevious handler if it exists
       if (currentStepConfig.onPrevious) {
@@ -207,12 +207,12 @@ export function useMultiStepForm<TFormData extends FieldValues = FieldValues>({
   const getStepData = useCallback((stepIndex?: number): Partial<TFormData> => {
     const targetStep = stepIndex ?? currentStep;
     const stepConfig = steps[targetStep];
-    
+
     if (!stepConfig) return {};
-    
+
     const stepFieldNames = stepConfig.fields.map(field => field.name);
     const currentFormData = getValues();
-    
+
     return stepFieldNames.reduce((acc, fieldName) => {
       if (fieldName in currentFormData) {
         acc[fieldName] = currentFormData[fieldName];
@@ -232,7 +232,7 @@ export function useMultiStepForm<TFormData extends FieldValues = FieldValues>({
 
   const submitForm = useCallback(async () => {
     setIsSubmitting(true);
-    
+
     try {
       const validation = await validateAllSteps();
       if (!validation.isValid) {
@@ -242,10 +242,10 @@ export function useMultiStepForm<TFormData extends FieldValues = FieldValues>({
 
       // Form is valid, proceed with submission
       const finalData = getValues();
-      
+
       // Clear saved data after successful submission
       autoSaveResult.clearSavedData();
-      
+
       return finalData;
     } catch (error) {
       console.error('Form submission error:', error);
@@ -273,13 +273,13 @@ export function useMultiStepForm<TFormData extends FieldValues = FieldValues>({
   // Update completed steps when form data changes
   useEffect(() => {
     const newCompletedSteps = new Set<number>();
-    
+
     steps.forEach((step, index) => {
       if (index < currentStep && isStepValid(formData, step)) {
         newCompletedSteps.add(index);
       }
     });
-    
+
     setCompletedSteps(newCompletedSteps);
   }, [formData, steps, currentStep]);
 
@@ -289,26 +289,26 @@ export function useMultiStepForm<TFormData extends FieldValues = FieldValues>({
     totalSteps,
     formState,
     form,
-    
+
     // Navigation
     goToStep,
     nextStep,
     previousStep,
     canGoNext,
     canGoPrevious,
-    
+
     // Validation
     validateCurrentStep,
     validateAllSteps,
-    
+
     // Data management
     updateFormData,
     getStepData,
     resetForm,
-    
+
     // Submission
     submitForm,
-    
+
     // Auto-save
     saveProgress,
     loadSavedProgress,

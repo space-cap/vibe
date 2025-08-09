@@ -30,23 +30,23 @@ export interface FormField<TFormData extends FieldValues = FieldValues> {
   component?: ReactNode | ((props: FieldComponentProps<TFormData>) => ReactNode);
 }
 
-export type FieldType = 
-  | 'text' 
-  | 'email' 
-  | 'password' 
-  | 'number' 
-  | 'tel' 
-  | 'url' 
-  | 'textarea' 
-  | 'select' 
-  | 'multiselect' 
-  | 'checkbox' 
-  | 'radio' 
-  | 'date' 
-  | 'time' 
-  | 'datetime-local' 
-  | 'file' 
-  | 'range' 
+export type FieldType =
+  | 'text'
+  | 'email'
+  | 'password'
+  | 'number'
+  | 'tel'
+  | 'url'
+  | 'textarea'
+  | 'select'
+  | 'multiselect'
+  | 'checkbox'
+  | 'radio'
+  | 'date'
+  | 'time'
+  | 'datetime-local'
+  | 'file'
+  | 'range'
   | 'color'
   | 'custom';
 
@@ -89,40 +89,40 @@ export interface MultiStepFormProps<TFormData extends FieldValues = FieldValues>
   onSubmit: (data: TFormData) => void | Promise<void>;
   onSave?: (data: Partial<TFormData>, currentStep: number) => void | Promise<void>;
   onCancel?: () => void;
-  
+
   // Auto-save settings
   autoSave?: boolean;
   autoSaveInterval?: number; // milliseconds
   autoSaveKey?: string;
-  
+
   // UI customization
   showProgress?: boolean;
   showStepNumbers?: boolean;
   allowStepNavigation?: boolean;
   validateOnChange?: boolean;
   validateOnBlur?: boolean;
-  
+
   // Navigation
   nextButtonText?: string;
   previousButtonText?: string;
   submitButtonText?: string;
   cancelButtonText?: string;
   saveButtonText?: string;
-  
+
   // Layout
   className?: string;
   stepClassName?: string;
   fieldClassName?: string;
-  
+
   // Callbacks
   onStepChange?: (step: number, direction: 'next' | 'previous') => void;
   onFieldChange?: (fieldName: string, value: any, allValues: Partial<TFormData>) => void;
   onValidationError?: (errors: Record<string, string>, step: number) => void;
-  
+
   // Loading states
   isSubmitting?: boolean;
   isSaving?: boolean;
-  
+
   // Custom components
   stepperComponent?: ReactNode;
   loadingComponent?: ReactNode;
@@ -191,26 +191,26 @@ export interface UseMultiStepFormReturn<TFormData extends FieldValues = FieldVal
   totalSteps: number;
   formState: FormState<TFormData>;
   form: UseFormReturn<TFormData>;
-  
+
   // Navigation
   goToStep: (step: number) => void;
   nextStep: () => Promise<boolean>;
   previousStep: () => void;
   canGoNext: boolean;
   canGoPrevious: boolean;
-  
+
   // Validation
   validateCurrentStep: () => Promise<ValidationResult>;
   validateAllSteps: () => Promise<ValidationResult>;
-  
+
   // Data management
   updateFormData: (data: Partial<TFormData>) => void;
   getStepData: (stepIndex?: number) => Partial<TFormData>;
   resetForm: () => void;
-  
+
   // Submission
   submitForm: () => Promise<void>;
-  
+
   // Auto-save
   saveProgress: () => Promise<void>;
   loadSavedProgress: () => void;

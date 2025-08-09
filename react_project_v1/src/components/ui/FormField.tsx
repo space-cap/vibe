@@ -43,7 +43,7 @@ export function FormFieldRenderer<TFormData extends FieldValues = FieldValues>({
 
           return (
             <div className={`form-field ${className}`}>
-              {typeof field.component === 'function' 
+              {typeof field.component === 'function'
                 ? field.component(componentProps)
                 : field.component
               }

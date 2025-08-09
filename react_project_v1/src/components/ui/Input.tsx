@@ -14,7 +14,7 @@ const Input = ({ label, error, className, ...props }: InputProps) => {
   return (
     <div className="w-full">
       {label && (
-        <label 
+        <label
           htmlFor={inputId}
           className="block text-sm font-medium text-gray-700 mb-1"
         >

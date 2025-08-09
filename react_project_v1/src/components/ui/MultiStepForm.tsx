@@ -19,40 +19,40 @@ export function MultiStepForm<TFormData extends FieldValues = FieldValues>({
   onSubmit,
   onSave,
   onCancel,
-  
+
   // Auto-save settings
   autoSave = false,
   autoSaveInterval = 30000,
   autoSaveKey = 'multistep-form',
-  
+
   // UI customization
   showProgress = true,
   showStepNumbers = true,
   allowStepNavigation = false,
   validateOnChange = false,
   validateOnBlur = true,
-  
+
   // Navigation
   nextButtonText = 'Next',
   previousButtonText = 'Previous',
   submitButtonText = 'Submit',
   cancelButtonText = 'Cancel',
   saveButtonText = 'Save',
-  
+
   // Layout
   className = '',
   stepClassName = '',
   fieldClassName = '',
-  
+
   // Callbacks
   onStepChange,
   onFieldChange,
   onValidationError,
-  
+
   // Loading states
   isSubmitting: externalIsSubmitting = false,
   isSaving: externalIsSaving = false,
-  
+
   // Custom components
   stepperComponent,
   loadingComponent,
@@ -120,7 +120,7 @@ export function MultiStepForm<TFormData extends FieldValues = FieldValues>({
       onValidationError?.(validation.errors, currentStep);
       return;
     }
-    
+
     await nextStep();
   }, [validateCurrentStep, nextStep, onValidationError, currentStep]);
 
@@ -181,7 +181,7 @@ export function MultiStepForm<TFormData extends FieldValues = FieldValues>({
               />
             )}
           </div>
-          
+
           <div className="md:hidden">
             <MobileStepNavigation
               currentStep={currentStep}
@@ -209,7 +209,7 @@ export function MultiStepForm<TFormData extends FieldValues = FieldValues>({
               </>
             )}
           </div>
-          
+
           <button
             type="button"
             onClick={handleSave}

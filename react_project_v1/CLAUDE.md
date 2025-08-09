@@ -127,5 +127,5 @@ src/
 
 ## Example Pages
 - **Home** (`/`) - Landing page with intro
-- **About** (`/about`) - About page with tech stack info  
+- **About** (`/about`) - About page with tech stack info
 - **Profile** (`/profile`) - User profile page with UserProfile component

@@ -32,51 +32,51 @@ export function DataTable<T = any>({
   columns,
   loading = false,
   error = null,
-  
+
   rowKey,
-  
+
   sortable = true,
   defaultSort,
   onSort,
-  
+
   filterable = true,
   filters: externalFilters,
   onFiltersChange,
-  
+
   pagination = false,
   paginationState: externalPagination,
   onPaginationChange,
-  
+
   selectable = false,
   selectedRows: externalSelectedRows,
   onSelectionChange,
   bulkActions = [],
-  
+
   virtual = false,
   virtualHeight = 400,
   rowHeight = 48,
-  
+
   className = '',
   tableClassName = '',
   headerClassName = '',
   bodyClassName = '',
   rowClassName = '',
-  
+
   emptyMessage = 'No data available',
-  
+
   ariaLabel = 'Data table',
   ariaLabelledBy,
-  
+
   onRowClick,
   onRowDoubleClick,
   onRowHover,
-  
+
   loadingComponent,
   errorComponent,
   emptyComponent,
 }: DataTableProps<T>) {
   const scrollElementRef = useRef<HTMLDivElement>(null);
-  
+
   const [internalSort, setInternalSort] = useState<SortState<T>>(
     defaultSort || { column: null, direction: null }
   );
@@ -106,21 +106,21 @@ export function DataTable<T = any>({
 
   const processedData = useMemo(() => {
     let result = [...data];
-    
+
     if (filterable && filtersState) {
       result = filterData(result, filtersState, columns);
     }
-    
+
     if (sortable && sortState.column && sortState.direction) {
       result = sortData(result, sortState, columns);
     }
-    
+
     return result;
   }, [data, filtersState, sortState, columns, filterable, sortable]);
 
   const paginatedData = useMemo(() => {
     if (!pagination) return { items: processedData, totalPages: 1 };
-    
+
     return paginateData(processedData, paginationState.page, paginationState.pageSize);
   }, [processedData, pagination, paginationState.page, paginationState.pageSize]);
 
@@ -161,7 +161,7 @@ export function DataTable<T = any>({
   const selectionState: SelectionState<T> = useMemo(() => {
     const allRowKeys = finalData.map((row, index) => getRowKeyFn(row, index));
     const selectedCount = allRowKeys.filter(key => selectedRowsState.has(key)).length;
-    
+
     return {
       selectedRows: selectedRowsState,
       isAllSelected: selectedCount === allRowKeys.length && allRowKeys.length > 0,
@@ -186,7 +186,7 @@ export function DataTable<T = any>({
 
   const handleFilterChange = useCallback((columnKey: string, value: any) => {
     const newFilters = { ...filtersState, [columnKey]: value };
-    
+
     if (onFiltersChange) {
       onFiltersChange(newFilters);
     } else {
@@ -257,7 +257,7 @@ export function DataTable<T = any>({
       const totalItems = processedData.length;
       const totalPages = Math.ceil(totalItems / paginationState.pageSize);
       const currentPage = Math.min(paginationState.page, Math.max(0, totalPages - 1));
-      
+
       if (
         totalItems !== internalPagination.totalItems ||
         totalPages !== internalPagination.totalPages ||
@@ -337,7 +337,7 @@ export function DataTable<T = any>({
                   />
                 </th>
               )}
-              
+
               {columns.map((column, columnIndex) => (
                 <th
                   key={String(column.key)}
@@ -352,7 +352,7 @@ export function DataTable<T = any>({
                   role="columnheader"
                   aria-colindex={columnIndex + (selectable ? 2 : 1)}
                   aria-sort={
-                    sortState.column === column.key 
+                    sortState.column === column.key
                       ? sortState.direction === 'asc' ? 'ascending' : 'descending'
                       : 'none'
                   }
@@ -364,8 +364,8 @@ export function DataTable<T = any>({
                       <button
                         onClick={() => handleSort(column.key)}
                         className={`group inline-flex ${
-                          (column.sortable !== false && sortable) 
-                            ? 'cursor-pointer hover:text-gray-900' 
+                          (column.sortable !== false && sortable)
+                            ? 'cursor-pointer hover:text-gray-900'
                             : 'cursor-default'
                         }`}
                         disabled={column.sortable === false && !sortable}
@@ -433,13 +433,13 @@ export function DataTable<T = any>({
               </tr>
             ) : (
               displayData.map((row, index) => {
-                const actualIndex = virtual 
+                const actualIndex = virtual
                   ? virtualItems.find(item => finalData[item.index] === row)?.index || index
                   : index;
                 const key = getRowKeyFn(row, actualIndex);
                 const isSelected = isRowSelected(key, selectedRowsState);
-                const rowClass = typeof rowClassName === 'function' 
-                  ? rowClassName(row, actualIndex) 
+                const rowClass = typeof rowClassName === 'function'
+                  ? rowClassName(row, actualIndex)
                   : rowClassName;
 
                 return (
@@ -474,7 +474,7 @@ export function DataTable<T = any>({
                     {columns.map((column, columnIndex) => {
                       const value = column.accessor ? column.accessor(row) : row[column.key];
                       const cellIndex = columnIndex + (selectable ? 1 : 0);
-                      
+
                       return (
                         <td
                           key={String(column.key)}

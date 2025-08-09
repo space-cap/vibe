@@ -19,31 +19,31 @@ export function useAutoSave<TFormData extends FieldValues = FieldValues>({
   const [isSaving, setIsSaving] = useState(false);
   const [saveError, setSaveError] = useState<Error | null>(null);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
-  
+
   const intervalRef = useRef<NodeJS.Timeout>();
   const debounceRef = useRef<NodeJS.Timeout>();
   const lastDataRef = useRef<Partial<TFormData>>(data);
 
   const saveData = useCallback(async (forceImmediate = false) => {
     if (!enabled || !config.enabled) return;
-    
+
     if (isSaving && !forceImmediate) return;
-    
+
     try {
       setIsSaving(true);
       setSaveError(null);
-      
+
       await config.onSave(data);
-      
+
       setLastSaved(new Date());
       setHasUnsavedChanges(false);
       lastDataRef.current = { ...data };
-      
+
       localStorage.setItem(config.key, JSON.stringify({
         data,
         timestamp: Date.now(),
       }));
-      
+
     } catch (error) {
       const saveError = error instanceof Error ? error : new Error('Save failed');
       setSaveError(saveError);
@@ -83,12 +83,12 @@ export function useAutoSave<TFormData extends FieldValues = FieldValues>({
 
     if (hasDataChanged()) {
       setHasUnsavedChanges(true);
-      
+
       // Clear existing debounce
       if (debounceRef.current) {
         clearTimeout(debounceRef.current);
       }
-      
+
       // Set new debounce
       debounceRef.current = setTimeout(() => {
         saveData();
@@ -192,7 +192,7 @@ export function useFormPersistence<TFormData extends FieldValues = FieldValues>(
       if (saved) {
         const parsed = JSON.parse(saved);
         const age = Date.now() - parsed.timestamp;
-        
+
         // Consider data stale after 24 hours
         if (age < 24 * 60 * 60 * 1000) {
           return parsed.data;

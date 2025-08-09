@@ -30,11 +30,11 @@ export function useKeyboardNavigation({
 
     const rows = tableRef.current.querySelectorAll('tbody tr');
     const targetRow = rows[clampedRow] as HTMLTableRowElement;
-    
+
     if (targetRow) {
       const cells = targetRow.querySelectorAll('td, th');
       const targetCell = cells[clampedColumn] as HTMLTableCellElement;
-      
+
       if (targetCell) {
         targetCell.focus();
         onCellFocus?.(clampedRow, clampedColumn);
@@ -149,7 +149,7 @@ export function useKeyboardNavigation({
     if (!table || disabled) return;
 
     table.addEventListener('keydown', handleKeyDown);
-    
+
     return () => {
       table.removeEventListener('keydown', handleKeyDown);
     };
@@ -157,7 +157,7 @@ export function useKeyboardNavigation({
 
   const setTableRef = useCallback((element: HTMLTableElement | null) => {
     tableRef.current = element;
-    
+
     if (element) {
       element.setAttribute('tabindex', '0');
       element.setAttribute('role', 'grid');

@@ -130,27 +130,27 @@ export function getRowKey<T>(row: T, index: number, rowKeyProp?: keyof T | ((row
   if (typeof rowKeyProp === 'function') {
     return rowKeyProp(row);
   }
-  
+
   if (rowKeyProp && row[rowKeyProp] !== undefined) {
     return String(row[rowKeyProp]);
   }
-  
+
   if ('id' in row && row.id !== undefined) {
     return String(row.id);
   }
-  
+
   return index;
 }
 
 export function createFilterState(columns: Column[]): FilterState {
   const filterState: FilterState = {};
-  
+
   columns.forEach(column => {
     if (column.filterable) {
       filterState[String(column.key)] = '';
     }
   });
-  
+
   return filterState;
 }
 
@@ -167,13 +167,13 @@ export function toggleRowSelection<T>(
   data: T[]
 ): Set<string | number> {
   const newSelection = new Set(selectedRows);
-  
+
   if (newSelection.has(rowKey)) {
     newSelection.delete(rowKey);
   } else {
     newSelection.add(rowKey);
   }
-  
+
   return newSelection;
 }
 
@@ -184,7 +184,7 @@ export function toggleAllRowsSelection<T>(
 ): Set<string | number> {
   const allRowKeys = data.map((row, index) => getRowKey(row, index));
   const allSelected = allRowKeys.every(key => currentSelection.has(key));
-  
+
   if (allSelected) {
     return new Set();
   } else {

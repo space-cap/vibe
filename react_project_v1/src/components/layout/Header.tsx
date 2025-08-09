@@ -11,24 +11,24 @@ const Header = () => {
           <nav>
             <ul className="flex space-x-6">
               <li>
-                <Link 
-                  to="/" 
+                <Link
+                  to="/"
                   className="text-gray-600 hover:text-gray-800 transition-colors"
                 >
                   Home
                 </Link>
               </li>
               <li>
-                <Link 
-                  to="/about" 
+                <Link
+                  to="/about"
                   className="text-gray-600 hover:text-gray-800 transition-colors"
                 >
                   About
                 </Link>
               </li>
               <li>
-                <Link 
-                  to="/profile" 
+                <Link
+                  to="/profile"
                   className="text-gray-600 hover:text-gray-800 transition-colors"
                 >
                   Profile

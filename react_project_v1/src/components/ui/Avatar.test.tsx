@@ -5,8 +5,8 @@ describe('Avatar', () => {
   describe('With Image Source', () => {
     it('renders image when src is provided', () => {
       render(
-        <Avatar 
-          src="https://example.com/avatar.jpg" 
+        <Avatar
+          src="https://example.com/avatar.jpg"
           alt="User Avatar"
         />
       );
@@ -19,8 +19,8 @@ describe('Avatar', () => {
 
     it('applies correct size classes for image', () => {
       render(
-        <Avatar 
-          src="https://example.com/avatar.jpg" 
+        <Avatar
+          src="https://example.com/avatar.jpg"
           size="lg"
         />
       );
@@ -76,7 +76,7 @@ describe('Avatar', () => {
   describe('Custom Styling', () => {
     it('applies custom className to image', () => {
       render(
-        <Avatar 
+        <Avatar
           src="https://example.com/avatar.jpg"
           className="custom-class"
         />
@@ -88,7 +88,7 @@ describe('Avatar', () => {
 
     it('applies custom className to fallback', () => {
       render(
-        <Avatar 
+        <Avatar
           fallback="JD"
           className="custom-class"
         />

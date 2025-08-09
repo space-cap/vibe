@@ -7,7 +7,7 @@ const HomePage = () => {
         Welcome to React App
       </h1>
       <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-        This is a modern React application built with Vite, TypeScript, 
+        This is a modern React application built with Vite, TypeScript,
         Tailwind CSS, React Router, and React Query.
       </p>
       <div className="space-x-4">

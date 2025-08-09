@@ -14,12 +14,12 @@ interface UserProfileProps {
   className?: string;
 }
 
-const UserProfile = ({ 
-  user, 
-  onSave, 
-  onCancel, 
+const UserProfile = ({
+  user,
+  onSave,
+  onCancel,
   isEditable = true,
-  className 
+  className
 }: UserProfileProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedUser, setEditedUser] = useState<User>(user);
@@ -126,14 +126,14 @@ const UserProfile = ({
               />
 
               <div className="flex space-x-3 pt-2">
-                <Button 
+                <Button
                   onClick={handleSave}
                   variant="primary"
                   className="flex-1"
                 >
                   Save Changes
                 </Button>
-                <Button 
+                <Button
                   onClick={handleCancel}
                   variant="outline"
                   className="flex-1"
@@ -155,7 +155,7 @@ const UserProfile = ({
             </div>
 
             {isEditable && (
-              <Button 
+              <Button
                 onClick={handleEdit}
                 variant="outline"
                 className="mt-4"

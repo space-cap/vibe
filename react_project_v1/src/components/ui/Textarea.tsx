@@ -14,7 +14,7 @@ const Textarea = ({ label, error, className, ...props }: TextareaProps) => {
   return (
     <div className="w-full">
       {label && (
-        <label 
+        <label
           htmlFor={textareaId}
           className="block text-sm font-medium text-gray-700 mb-1"
         >

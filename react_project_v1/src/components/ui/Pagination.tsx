@@ -33,7 +33,7 @@ export function Pagination({
   const handlePageSizeChange = (newPageSize: number) => {
     const newTotalPages = Math.ceil(totalItems / newPageSize);
     const newPage = Math.min(page, Math.max(0, newTotalPages - 1));
-    
+
     onPaginationChange({
       ...pagination,
       pageSize: newPageSize,
@@ -46,12 +46,12 @@ export function Pagination({
     const delta = 2;
     const start = Math.max(0, page - delta);
     const end = Math.min(totalPages - 1, page + delta);
-    
+
     const pages: number[] = [];
     for (let i = start; i <= end; i++) {
       pages.push(i);
     }
-    
+
     return pages;
   };
 
@@ -71,7 +71,7 @@ export function Pagination({
             <span className="font-medium">{totalItems}</span> results
           </div>
         )}
-        
+
         {showPageSizeSelector && (
           <div className="flex items-center space-x-2">
             <label htmlFor="page-size" className="text-sm text-gray-700">

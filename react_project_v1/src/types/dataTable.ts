@@ -56,55 +56,55 @@ export interface DataTableProps<T = any> {
   columns: Column<T>[];
   loading?: boolean;
   error?: string | null;
-  
+
   // Row identification
   rowKey?: keyof T | ((row: T) => string | number);
-  
+
   // Sorting
   sortable?: boolean;
   defaultSort?: SortState<T>;
   onSort?: (sortState: SortState<T>) => void;
-  
+
   // Filtering
   filterable?: boolean;
   filters?: FilterState;
   onFiltersChange?: (filters: FilterState) => void;
-  
+
   // Pagination
   pagination?: boolean;
   paginationState?: PaginationState;
   onPaginationChange?: (pagination: PaginationState) => void;
-  
+
   // Selection
   selectable?: boolean;
   selectedRows?: Set<string | number>;
   onSelectionChange?: (selection: SelectionState<T>) => void;
   bulkActions?: BulkAction<T>[];
-  
+
   // Virtualization
   virtual?: boolean;
   virtualHeight?: number;
   rowHeight?: number;
-  
+
   // Styling
   className?: string;
   tableClassName?: string;
   headerClassName?: string;
   bodyClassName?: string;
   rowClassName?: string | ((row: T, index: number) => string);
-  
+
   // Empty state
   emptyMessage?: string | ReactNode;
-  
+
   // Accessibility
   ariaLabel?: string;
   ariaLabelledBy?: string;
-  
+
   // Row events
   onRowClick?: (row: T, index: number) => void;
   onRowDoubleClick?: (row: T, index: number) => void;
   onRowHover?: (row: T, index: number) => void;
-  
+
   // Custom components
   loadingComponent?: ReactNode;
   errorComponent?: ReactNode;

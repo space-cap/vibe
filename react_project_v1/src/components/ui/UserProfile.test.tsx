@@ -98,7 +98,7 @@ describe('UserProfile', () => {
 
       const nameInput = screen.getByDisplayValue('John Doe');
       await user.clear(nameInput);
-      
+
       await user.click(screen.getByText('Save Changes'));
 
       expect(screen.getByText('Name is required')).toBeInTheDocument();
@@ -114,7 +114,7 @@ describe('UserProfile', () => {
       const emailInput = screen.getByDisplayValue('john.doe@example.com');
       await user.clear(emailInput);
       await user.type(emailInput, 'invalid-email');
-      
+
       await user.click(screen.getByText('Save Changes'));
 
       expect(screen.getByText('Please enter a valid email address')).toBeInTheDocument();
