@@ -3,7 +3,11 @@
     "allow": [
       "Bash(python:*)",
       "Bash(start index.html)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git push:*)",
+      "Bash(gh repo create:*)",
+      "Bash(git init:*)",
+      "Bash(git commit:*)"
     ],
     "deny": []
   }
