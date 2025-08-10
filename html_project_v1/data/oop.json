@@ -1,0 +1,75 @@
+[
+    {
+        "category": "객체지향",
+        "difficulty": "medium",
+        "question": "자바의 4대 객체지향 특성이 아닌 것은?",
+        "options": ["캡슐화(Encapsulation)", "상속(Inheritance)", "다형성(Polymorphism)", "컴파일(Compilation)"],
+        "correct": 3,
+        "explanation": "자바의 4대 객체지향 특성은 캡슐화, 상속, 다형성, 추상화입니다.\n\n📋 4대 객체지향 특성 상세:\n• 캡슐화(Encapsulation): 데이터와 메서드를 하나로 묶고 외부 접근 제한\n• 상속(Inheritance): 기존 클래스의 속성과 메서드를 물려받아 재사용\n• 다형성(Polymorphism): 하나의 인터페이스로 여러 타입의 객체 처리\n• 추상화(Abstraction): 복잡한 내부 구현을 숨기고 필요한 기능만 노출\n\n💡 면접 포인트:\n각 특성이 소프트웨어 개발에 어떤 이점을 제공하는지 실제 예시와 함께 설명할 수 있어야 합니다.\n\n🚫 컴파일(Compilation)은 소스코드를 기계어로 변환하는 과정으로 객체지향 특성이 아닙니다."
+    },
+    {
+        "category": "객체지향",
+        "difficulty": "medium",
+        "question": "오버로딩(Overloading)과 오버라이딩(Overriding)의 차이점은?",
+        "options": [
+            "오버로딩은 같은 클래스, 오버라이딩은 상속 관계",
+            "오버로딩은 상속 관계, 오버라이딩은 같은 클래스",
+            "둘 다 같은 클래스에서만 가능",
+            "둘 다 상속 관계에서만 가능"
+        ],
+        "correct": 0,
+        "explanation": "오버로딩과 오버라이딩은 서로 다른 개념입니다.\n\n📋 오버로딩(Overloading) - 컴파일 타임 다형성:\n• 같은 클래스 내에서 수행\n• 메서드 이름은 동일, 매개변수가 달라야 함\n• 반환 타입은 다를 수 있음 (단, 매개변수가 같으면 안됨)\n• 컴파일 시점에 호출할 메서드 결정\n\n💡 오버로딩 예시:\npublic void print(int x) { ... }\npublic void print(String s) { ... }\npublic void print(int x, int y) { ... }\n\n📋 오버라이딩(Overriding) - 런타임 다형성:\n• 상속 관계에서 수행 (부모-자식 클래스)\n• 메서드 시그니처가 완전히 동일해야 함\n• @Override 애너테이션 사용 권장\n• 런타임에 실제 객체 타입에 따라 메서드 결정\n\n🎯 면접 팁: 다형성의 두 가지 형태로 구분하여 설명하면 좋습니다."
+    },
+    {
+        "category": "객체지향",
+        "difficulty": "easy",
+        "question": "자바에서 클래스와 객체의 차이점은?",
+        "options": [
+            "클래스는 설계도, 객체는 실제 인스턴스",
+            "클래스는 실제 인스턴스, 객체는 설계도",
+            "클래스와 객체는 동일한 개념",
+            "클래스는 메서드, 객체는 변수"
+        ],
+        "correct": 0,
+        "explanation": "클래스는 객체를 만들기 위한 설계도(blueprint)이고, 객체는 클래스를 바탕으로 생성된 실제 인스턴스입니다.\n\n📋 클래스(Class):\n• 객체의 속성(필드)과 행동(메서드)을 정의하는 틀\n• 메모리에 로드되지만 실제 공간을 차지하지 않음\n• 하나의 클래스로 여러 객체 생성 가능\n\n📋 객체(Object) / 인스턴스(Instance):\n• 클래스를 바탕으로 new 연산자로 생성\n• 힙 메모리에 실제 공간을 차지\n• 각각 독립적인 상태(필드 값)를 가짐\n\n💡 비유:\n• 클래스 = 자동차 설계도면\n• 객체 = 설계도로 만든 실제 자동차\n\n🔧 예시:\nclass Car { ... }        // 클래스 정의\nCar myCar = new Car();   // 객체 생성\nCar yourCar = new Car(); // 다른 객체 생성"
+    },
+    {
+        "category": "객체지향",
+        "difficulty": "medium",
+        "question": "자바에서 abstract 클래스와 interface의 차이점은?",
+        "options": [
+            "abstract 클래스는 다중상속 가능, interface는 단일상속만 가능",
+            "abstract 클래스는 단일상속만 가능, interface는 다중구현 가능",
+            "둘 다 다중상속 가능",
+            "둘 다 단일상속만 가능"
+        ],
+        "correct": 1,
+        "explanation": "Abstract 클래스는 단일 상속만 가능하고, Interface는 다중 구현이 가능합니다.\n\n📋 Abstract 클래스:\n• extends 키워드로 상속 (단일 상속)\n• 일반 메서드와 추상 메서드 모두 가질 수 있음\n• 인스턴스 변수(필드) 가질 수 있음\n• 생성자 가질 수 있음\n• 접근 제어자 자유롭게 사용 가능\n\n📋 Interface:\n• implements 키워드로 구현 (다중 구현 가능)\n• Java 8 이전: 추상 메서드만 가능\n• Java 8 이후: default, static 메서드 추가 가능\n• 상수(public static final)만 가질 수 있음\n• 생성자 가질 수 없음\n• 메서드는 기본적으로 public abstract\n\n💡 사용 시기:\n• Abstract 클래스: 공통 구현과 추상 메서드가 모두 필요한 경우\n• Interface: 다중 구현이 필요하거나 계약(contract) 정의 시\n\n🎯 면접 팁: Java 8+ 의 default 메서드 기능도 함께 언급하면 좋습니다."
+    },
+    {
+        "category": "객체지향",
+        "difficulty": "hard",
+        "question": "자바에서 다형성(Polymorphism)의 구현 방법이 아닌 것은?",
+        "options": [
+            "메서드 오버라이딩",
+            "인터페이스 구현",
+            "제네릭 사용",
+            "필드 오버로딩"
+        ],
+        "correct": 3,
+        "explanation": "'필드 오버로딩'은 존재하지 않는 개념입니다. 오버로딩은 메서드에만 적용됩니다.\n\n📋 자바에서 다형성 구현 방법:\n\n1️⃣ 메서드 오버라이딩:\n• 상속 관계에서 부모 클래스 메서드를 재정의\n• 런타임에 실제 객체 타입에 따라 메서드 호출\n\n2️⃣ 인터페이스 구현:\n• 같은 인터페이스를 구현한 여러 클래스\n• 인터페이스 참조로 다양한 구현체 사용\n\n3️⃣ 제네릭(Generic):\n• 타입 매개변수를 통한 타입 안정성\n• 하나의 클래스/메서드로 여러 타입 처리\n\n💡 다형성 예시:\nAnimal animal = new Dog(); // 업캐스팅\nanimal.makeSound();        // Dog의 makeSound() 호출\n\nList<String> list = new ArrayList<>(); // 인터페이스 다형성\n\n🚫 필드는 오버로딩 개념이 없습니다:\n• 같은 클래스에서 동일한 이름의 필드 중복 선언 불가\n• 상속 시 필드는 숨겨질 뿐 오버라이딩되지 않음\n\n🎯 면접 포인트: 다형성의 장점(유연성, 확장성, 유지보수성)도 함께 설명"
+    },
+    {
+        "category": "객체지향",
+        "difficulty": "hard",
+        "question": "자바에서 final 키워드의 용도가 아닌 것은?",
+        "options": [
+            "변수를 상수로 만들기",
+            "메서드 오버라이딩 방지",
+            "클래스 상속 방지",
+            "객체 가비지 컬렉션 방지"
+        ],
+        "correct": 3,
+        "explanation": "final 키워드는 가비지 컬렉션과는 관련이 없습니다.\n\n📋 final 키워드의 3가지 용도:\n\n1️⃣ 변수에 사용 - 상수 선언:\n• 한 번 초기화 후 값 변경 불가\n• 기본 타입: 값 자체가 상수\n• 참조 타입: 참조 주소가 상수 (객체 내용은 변경 가능)\n\n💡 예시:\nfinal int x = 10;        // x 값 변경 불가\nfinal List<String> list = new ArrayList<>();\n// list = new ArrayList(); // 컴파일 에러\nlist.add(\"item\");       // 내용 변경은 가능\n\n2️⃣ 메서드에 사용 - 오버라이딩 방지:\n• 하위 클래스에서 해당 메서드 재정의 불가\n• 메서드 구현 완성도가 높고 변경이 위험할 때 사용\n\n3️⃣ 클래스에 사용 - 상속 방지:\n• 해당 클래스를 상속받을 수 없음\n• String, Integer 등 Wrapper 클래스들이 final\n• 보안상 중요하거나 불변성이 필요한 클래스에 사용\n\n🚫 가비지 컬렉션은 객체의 참조 여부에 따라 결정되며, final 키워드와는 무관합니다.\n\n🎯 면접 팁: final 변수의 초기화 시점(선언시, 생성자, 초기화 블록)도 알아두면 좋습니다."
+    }
+]

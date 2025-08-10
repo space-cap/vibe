@@ -1,0 +1,41 @@
+[
+    {
+        "category": "멀티스레딩",
+        "difficulty": "hard",
+        "question": "synchronized 키워드의 역할은?",
+        "options": [
+            "스레드 간 동기화를 보장",
+            "스레드 생성 속도를 향상",
+            "메모리 사용량을 최적화",
+            "예외 처리를 자동화"
+        ],
+        "correct": 0,
+        "explanation": "synchronized 키워드는 멀티스레드 환경에서 공유 자원에 대한 동시 접근을 제어하여 스레드 안전성을 보장합니다.\n\n📋 synchronized의 역할:\n• 임계 구역(Critical Section) 설정\n• 한 번에 하나의 스레드만 접근 허용\n• 객체/클래스 레벨의 락(Lock) 사용\n• 메모리 가시성(Visibility) 보장\n\n🔧 사용 방법:\n1️⃣ 메서드 동기화:\npublic synchronized void method() { ... }\n\n2️⃣ 블록 동기화:\nsynchronized(this) { ... }     // 인스턴스 락\nsynchronized(Class.class) { ... } // 클래스 락\n\n⚠️ 성능 고려사항:\n• 락 경합으로 인한 성능 저하\n• 데드락 위험성\n• 과도한 동기화는 병목 발생\n\n🆚 대안 기술:\n• java.util.concurrent 패키지\n• ReentrantLock, Atomic 클래스\n• ConcurrentHashMap 등\n\n💡 면접 팁:\n동기화의 필요성과 문제점, 그리고 최신 동시성 도구들과의 비교를 함께 설명하면 좋습니다."
+    },
+    {
+        "category": "멀티스레딩",
+        "difficulty": "medium",
+        "question": "Thread의 생명주기에서 올바른 상태 전이는?",
+        "options": [
+            "NEW → RUNNABLE → RUNNING → TERMINATED",
+            "NEW → RUNNABLE → BLOCKED → TERMINATED",
+            "NEW → RUNNABLE → WAITING → RUNNABLE → TERMINATED",
+            "NEW → RUNNING → RUNNABLE → TERMINATED"
+        ],
+        "correct": 2,
+        "explanation": "스레드는 다양한 상태 간 전이가 가능하며, WAITING 후 다시 RUNNABLE로 돌아갈 수 있습니다.\n\n📋 Thread 상태 (Thread.State):\n\n🟢 NEW: 스레드 생성, 아직 start() 호출 안됨\n🔵 RUNNABLE: 실행 가능한 상태 (실행 중 또는 실행 대기)\n🟡 BLOCKED: 동기화 블록 진입을 위해 락 대기\n🟠 WAITING: 다른 스레드의 특정 작업을 무한정 대기\n⏰ TIMED_WAITING: 지정된 시간 동안 대기\n🔴 TERMINATED: 실행 완료 또는 예외로 종료\n\n🔄 상태 전이 예시:\nNEW → start() → RUNNABLE\nRUNNABLE → sleep(1000) → TIMED_WAITING → RUNNABLE\nRUNNABLE → wait() → WAITING → notify() → RUNNABLE\nRUNNABLE → synchronized 진입 실패 → BLOCKED → RUNNABLE\n\n💡 중요 포인트:\n• RUNNING 상태는 JVM 내부적으로만 존재\n• Java API에서는 RUNNABLE로 표현\n• 여러 상태를 거쳐 최종적으로 TERMINATED\n\n🔧 상태 확인 방법:\nThread.currentThread().getState();"
+    },
+    {
+        "category": "멀티스레딩",
+        "difficulty": "medium",
+        "question": "volatile 키워드의 주요 기능은?",
+        "options": [
+            "변수를 final로 만들기",
+            "메모리 가시성 보장",
+            "스레드 동기화",
+            "성능 최적화"
+        ],
+        "correct": 1,
+        "explanation": "volatile 키워드는 변수의 메모리 가시성(Visibility)을 보장합니다.\n\n📋 volatile의 기능:\n• 메인 메모리에서 직접 읽기/쓰기\n• CPU 캐시가 아닌 메인 메모리 접근\n• 다른 스레드의 변경사항 즉시 반영\n• 컴파일러 최적화 방지\n\n🔧 사용 예시:\nprivate volatile boolean flag = false;\n\n// Thread 1\nflag = true;\n\n// Thread 2\nwhile (!flag) {\n    // Thread 1의 변경사항을 즉시 감지\n}\n\n⚠️ 주의사항:\n• 단순 읽기/쓰기에만 원자성 보장\n• 복합 연산 (++, --) 에는 원자성 보장 안함\n• synchronized보다 가벼우나 기능 제한적\n\n🚫 안전하지 않은 예:\nvolatile int count = 0;\ncount++; // 읽기 + 증가 + 쓰기 (원자적이지 않음)\n\n✅ 안전한 사용 패턴:\n• 상태 플래그 (boolean)\n• 싱글톤의 인스턴스 참조\n• 단순한 값 전달\n\n💡 Double-Checked Locking 패턴에서 필수:\nprivate volatile static Singleton instance;"
+    }
+]

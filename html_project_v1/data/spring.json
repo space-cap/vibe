@@ -1,0 +1,54 @@
+[
+    {
+        "category": "Spring",
+        "difficulty": "hard",
+        "question": "Spring의 IoC(Inversion of Control) 컨테이너의 주요 기능은?",
+        "options": [
+            "의존성 주입과 빈 생명주기 관리",
+            "웹 요청 처리",
+            "데이터베이스 연결",
+            "보안 인증"
+        ],
+        "correct": 0,
+        "explanation": "IoC 컨테이너는 객체의 생성과 의존성 주입을 담당하며, 빈(Bean)의 생명주기를 관리하는 핵심 기능을 수행합니다.\n\n📋 IoC 컨테이너의 주요 역할:\n\n🏭 객체 생성 및 관리:\n• 애플리케이션 객체(빈)의 인스턴스화\n• 싱글톤, 프로토타입 등 스코프 관리\n• 객체 간 의존 관계 해결\n\n💉 의존성 주입 (DI):\n• 생성자 주입 (Constructor Injection)\n• 세터 주입 (Setter Injection)\n• 필드 주입 (Field Injection)\n\n🔄 빈 생명주기 관리:\n• 초기화 콜백: @PostConstruct, InitializingBean\n• 소멸 콜백: @PreDestroy, DisposableBean\n• 빈 후처리기 (BeanPostProcessor)\n\n🎯 IoC의 장점:\n• 결합도 감소 (Loose Coupling)\n• 테스트 용이성 향상\n• 코드 재사용성 증대\n• 관심사의 분리\n\n💡 설정 방법:\n• XML 기반: <bean> 태그\n• 애너테이션 기반: @Component, @Service, @Repository\n• Java Config: @Configuration, @Bean\n\n🔧 주요 컨테이너:\n• ApplicationContext: 기능이 풍부한 컨테이너\n• BeanFactory: 기본적인 DI 기능만 제공\n\n🎯 면접 팁: DI와 IoC의 개념 차이, Spring 없이 DI를 구현한다면 어떻게 할지도 생각해보세요."
+    },
+    {
+        "category": "Spring",
+        "difficulty": "medium",
+        "question": "Spring에서 @Autowired의 동작 방식은?",
+        "options": [
+            "타입(Type) 기반으로 의존성 주입",
+            "이름(Name) 기반으로 의존성 주입",
+            "XML 설정에 따라 주입",
+            "수동으로 객체 생성"
+        ],
+        "correct": 0,
+        "explanation": "@Autowired는 타입(Type) 기반으로 의존성을 자동 주입하는 애너테이션입니다.\n\n📋 @Autowired 동작 원리:\n\n1️⃣ 타입 기반 매칭:\n• 먼저 해당 타입의 빈을 컨테이너에서 검색\n• 정확히 일치하는 타입의 빈을 찾아 주입\n\n2️⃣ 매칭 우선순위:\n• 타입이 정확히 일치하는 빈\n• 상속/구현 관계의 빈 (하위 타입)\n• 같은 타입의 빈이 여러 개면 예외 발생\n\n💡 사용 위치:\n@Autowired\nprivate UserService userService; // 필드 주입\n\n@Autowired\npublic void setUserService(UserService userService) { ... } // 세터 주입\n\n@Autowired\npublic UserController(UserService userService) { ... } // 생성자 주입\n\n⚠️ 여러 빈이 있을 때 해결 방법:\n\n1️⃣ @Qualifier 사용:\n@Autowired\n@Qualifier(\"userServiceImpl\")\nprivate UserService userService;\n\n2️⃣ @Primary 사용:\n@Primary\n@Service\npublic class UserServiceImpl implements UserService { ... }\n\n3️⃣ 빈 이름 지정:\n@Autowired\nprivate UserService userServiceImpl; // 빈 이름과 필드명 매칭\n\n🆚 다른 주입 애너테이션:\n• @Resource: 이름 기반 주입 (JSR-250)\n• @Inject: 타입 기반 주입 (JSR-330)\n\n✅ 권장사항:\n생성자 주입을 권장 (불변성, 테스트 용이성, 순환 의존성 검출)"
+    },
+    {
+        "category": "Spring",
+        "difficulty": "medium",
+        "question": "Spring AOP에서 Aspect의 역할은?",
+        "options": [
+            "데이터베이스 트랜잭션 관리",
+            "횡단 관심사를 모듈화",
+            "웹 요청 라우팅",
+            "객체 직렬화"
+        ],
+        "correct": 1,
+        "explanation": "Aspect는 횡단 관심사(Cross-cutting Concerns)를 모듈화하여 핵심 비즈니스 로직과 분리하는 역할을 합니다.\n\n📋 AOP (Aspect-Oriented Programming) 핵심 개념:\n\n🎯 Aspect:\n• 횡단 관심사를 모듈화한 단위\n• 여러 객체에 공통으로 적용되는 기능\n• 예: 로깅, 보안, 트랜잭션, 캐싱\n\n🔧 주요 구성 요소:\n• Joinpoint: 적용 가능한 지점 (메서드 실행, 필드 접근 등)\n• Pointcut: 실제 적용할 지점을 선별하는 표현식\n• Advice: 실제 수행할 동작\n• Weaving: Aspect를 대상 객체에 적용하는 과정\n\n💡 Advice 종류:\n• @Before: 메서드 실행 전\n• @After: 메서드 실행 후\n• @AfterReturning: 메서드 정상 반환 후\n• @AfterThrowing: 예외 발생 후\n• @Around: 메서드 실행 전후 (가장 강력)\n\n🔧 사용 예시:\n@Aspect\n@Component\npublic class LoggingAspect {\n    @Around(\"@annotation(Loggable)\")\n    public Object logExecutionTime(ProceedingJoinPoint joinPoint) {\n        long start = System.currentTimeMillis();\n        Object result = joinPoint.proceed();\n        long end = System.currentTimeMillis();\n        log.info(\"Execution time: {}ms\", end - start);\n        return result;\n    }\n}\n\n🎯 장점:\n• 코드 중복 제거\n• 관심사의 분리\n• 모듈성 향상\n• 유지보수성 증대\n\n⚙️ Spring AOP 특징:\n• 프록시 기반 구현\n• 런타임 위빙\n• 메서드 레벨 인터셉션만 지원\n• AspectJ와 연동 가능"
+    },
+    {
+        "category": "Spring",
+        "difficulty": "easy",
+        "question": "Spring Boot의 주요 특징이 아닌 것은?",
+        "options": [
+            "자동 설정(Auto Configuration)",
+            "내장 톰캣 서버",
+            "XML 설정 필수",
+            "스타터 의존성"
+        ],
+        "correct": 2,
+        "explanation": "Spring Boot는 XML 설정을 최소화하고 애너테이션 기반의 자동 설정을 제공합니다.\n\n📋 Spring Boot의 주요 특징:\n\n⚙️ 자동 설정 (Auto Configuration):\n• @SpringBootApplication 하나로 기본 설정 완료\n• Classpath의 라이브러리를 기반으로 자동 구성\n• 조건부 설정 (@ConditionalOnClass, @ConditionalOnProperty)\n\n🌐 내장 서버:\n• 톰캣, 제티, 언더토우 등 내장 서버 제공\n• JAR 파일 하나로 실행 가능한 애플리케이션\n• 별도 서버 설치 불필요\n\n📦 스타터 의존성 (Starter Dependencies):\n• spring-boot-starter-web: 웹 개발용\n• spring-boot-starter-data-jpa: JPA 데이터 액세스\n• spring-boot-starter-security: 보안 기능\n• 호환되는 라이브러리 버전 자동 관리\n\n📊 액추에이터 (Actuator):\n• 애플리케이션 모니터링과 관리 기능\n• 헬스 체크, 메트릭스, 설정 정보 제공\n• /actuator/health, /actuator/info 등 엔드포인트\n\n🚫 XML 설정 최소화:\n• 전통적인 Spring의 복잡한 XML 설정 불필요\n• Java Config와 애너테이션 기반 설정 권장\n• 필요시에만 선택적으로 XML 사용 가능\n\n💡 개발 편의 기능:\n• Spring Boot DevTools: 자동 재시작\n• application.properties/yml: 외부 설정\n• 프로파일 기반 설정 (@Profile)\n\n🎯 철학: \"Convention over Configuration\"\n설정보다는 관례를 따라 개발 생산성 극대화"
+    }
+]

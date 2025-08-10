@@ -1,0 +1,36 @@
+[
+    {
+        "category": "JVM",
+        "difficulty": "hard",
+        "question": "JVM 메모리 영역 중 Heap 영역에 저장되는 것은?",
+        "options": ["지역 변수", "객체 인스턴스", "메서드 정보", "static 변수"],
+        "correct": 1,
+        "explanation": "Heap 영역은 객체 인스턴스와 배열이 저장되는 공간입니다.\n\n📋 JVM 메모리 구조:\n\n🏠 Heap 영역 (공유 메모리):\n• 객체 인스턴스와 배열 저장\n• 모든 스레드가 공유\n• 가비지 컬렉션 대상\n• Young Generation + Old Generation\n\n📚 Method Area (공유 메모리):\n• 클래스 메타데이터 (클래스 정보, 상수, static 변수)\n• 런타임 상수 풀\n• JVM 벤더에 따라 구현 다름 (PermGen, Metaspace)\n\n📚 Stack 영역 (스레드별 독립):\n• 지역 변수, 매개변수\n• 메서드 호출 스택 프레임\n• 스레드마다 독립적으로 할당\n\n📚 PC Register (스레드별 독립):\n• 현재 실행 중인 JVM 명령어 주소\n\n📚 Native Method Stack:\n• JNI를 통한 네이티브 메서드 호출 시 사용\n\n💡 면접 포인트:\n• Java 8부터 PermGen → Metaspace 변경\n• OutOfMemoryError 발생 가능 영역들\n• 가비지 컬렉션과 힙 영역의 관계"
+    },
+    {
+        "category": "JVM",
+        "difficulty": "medium",
+        "question": "가비지 컬렉션(GC)의 주요 목적은?",
+        "options": [
+            "프로그램 실행 속도 향상",
+            "사용하지 않는 메모리 자동 해제",
+            "스레드 동기화",
+            "예외 처리 자동화"
+        ],
+        "correct": 1,
+        "explanation": "가비지 컬렉션은 더 이상 참조되지 않는 객체들을 자동으로 찾아서 메모리에서 해제하는 기능입니다.\n\n📋 GC의 주요 역할:\n• 참조되지 않는 객체 탐지\n• 메모리 자동 해제 및 정리\n• 메모리 누수 방지\n• 개발자의 수동 메모리 관리 부담 해소\n\n🔍 GC 동작 원리:\n1️⃣ Mark: 살아있는 객체 표시\n2️⃣ Sweep: 죽은 객체 메모리 해제\n3️⃣ Compact: 메모리 단편화 해소 (선택적)\n\n📊 Heap 영역 구조 (Generational GC):\n• Young Generation\n  - Eden: 새 객체 생성 공간\n  - S0, S1: Survivor 영역\n• Old Generation: 오래 살아남은 객체\n• (Permanent Generation: Java 8 이전)\n\n⚡ GC 알고리즘 종류:\n• Serial GC: 단일 스레드\n• Parallel GC: 멀티 스레드\n• G1 GC: 저지연 목적\n• ZGC, Shenandoah: 초저지연\n\n⚠️ GC의 단점:\n• Stop-The-World: GC 실행 중 애플리케이션 일시 정지\n• 예측하기 어려운 실행 시점\n• 성능에 영향 가능\n\n💡 면접 팁: GC 튜닝 옵션과 모니터링 도구에 대한 지식도 유용합니다."
+    },
+    {
+        "category": "JVM",
+        "difficulty": "hard",
+        "question": "JIT 컴파일러의 역할은?",
+        "options": [
+            "소스코드를 바이트코드로 변환",
+            "바이트코드를 기계어로 동적 컴파일",
+            "메모리 할당 및 해제",
+            "스레드 스케줄링"
+        ],
+        "correct": 1,
+        "explanation": "JIT(Just-In-Time) 컴파일러는 런타임에 바이트코드를 네이티브 기계어로 동적 컴파일하여 성능을 향상시킵니다.\n\n📋 JIT 컴파일러 동작 과정:\n\n1️⃣ 초기 실행:\n• 바이트코드를 인터프리터가 해석 실행\n• 실행 빈도와 성능 정보 수집\n\n2️⃣ 핫스팟 탐지:\n• 자주 실행되는 코드 구간 (Hot Spot) 식별\n• 임계값 초과 시 컴파일 대상 선정\n\n3️⃣ 네이티브 컴파일:\n• 바이트코드 → 최적화된 기계어 변환\n• CPU별 최적화 적용\n\n4️⃣ 코드 캐싱 및 실행:\n• 컴파일된 네이티브 코드 저장\n• 이후 직접 기계어로 실행\n\n⚡ 최적화 기법:\n• 인라인 확장 (Method Inlining)\n• 루프 최적화 (Loop Optimization)\n• 데드 코드 제거 (Dead Code Elimination)\n• 상수 폴딩 (Constant Folding)\n\n🏃‍♂️ 성능 향상:\n• 초기: 인터프리터 모드 (상대적으로 느림)\n• 워밍업: JIT 컴파일 진행\n• 안정화: 네이티브 코드 실행 (매우 빠름)\n\n💡 HotSpot JVM의 핵심:\n• C1 컴파일러: 빠른 컴파일, 기본 최적화\n• C2 컴파일러: 느린 컴파일, 고도 최적화\n• Tiered Compilation: 단계적 컴파일\n\n🎯 면접 포인트: Java의 '한번 작성, 어디서나 실행'과 고성능을 동시에 달성하는 핵심 기술"
+    }
+]

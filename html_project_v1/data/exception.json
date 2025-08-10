@@ -1,0 +1,41 @@
+[
+    {
+        "category": "예외 처리",
+        "difficulty": "medium",
+        "question": "Checked Exception과 Unchecked Exception의 차이는?",
+        "options": [
+            "Checked는 컴파일 시점, Unchecked는 런타임 시점에 확인",
+            "Checked는 런타임 시점, Unchecked는 컴파일 시점에 확인",
+            "둘 다 컴파일 시점에 확인",
+            "둘 다 런타임 시점에 확인"
+        ],
+        "correct": 0,
+        "explanation": "Checked Exception과 Unchecked Exception은 처리 시점과 강제성이 다릅니다.\n\n📋 Checked Exception:\n• 컴파일 시점에 처리 강제\n• Exception 클래스 상속 (RuntimeException 제외)\n• 반드시 try-catch 또는 throws 선언 필요\n• 예시: IOException, SQLException, ClassNotFoundException\n\n💡 Checked Exception 예시:\ntry {\n    FileReader file = new FileReader(\"file.txt\"); // IOException\n} catch (IOException e) {\n    e.printStackTrace();\n}\n\n📋 Unchecked Exception (Runtime Exception):\n• 런타임 시점에 발생\n• RuntimeException 클래스 상속\n• 처리가 선택사항 (컴파일러가 강제하지 않음)\n• 예시: NullPointerException, ArrayIndexOutOfBoundsException\n\n💡 Unchecked Exception 예시:\nString str = null;\nint length = str.length(); // NullPointerException 발생 가능\n\n🎯 설계 철학:\n• Checked: 예측 가능하고 복구 가능한 예외\n• Unchecked: 프로그래밍 오류로 인한 예외\n\n⚖️ 논란: Checked Exception의 과도한 사용에 대한 비판도 존재"
+    },
+    {
+        "category": "예외 처리",
+        "difficulty": "easy",
+        "question": "try-catch-finally 블록에서 finally의 실행 시점은?",
+        "options": [
+            "예외가 발생한 경우에만 실행",
+            "예외가 발생하지 않은 경우에만 실행",
+            "예외 발생 여부와 관계없이 항상 실행",
+            "return 문이 있으면 실행되지 않음"
+        ],
+        "correct": 2,
+        "explanation": "finally 블록은 예외 발생 여부와 관계없이 항상 실행됩니다.\n\n📋 finally 블록 실행 규칙:\n• try 블록 정상 실행 후 → finally 실행\n• catch 블록 실행 후 → finally 실행\n• try/catch에서 return 해도 → finally 실행 후 return\n• try/catch에서 예외 던져도 → finally 실행 후 예외 전파\n\n💡 실행 순서 예시:\ntry {\n    System.out.println(\"1. try\");\n    return \"try-return\";\n} catch (Exception e) {\n    System.out.println(\"2. catch\");\n    return \"catch-return\";\n} finally {\n    System.out.println(\"3. finally\"); // 반드시 실행\n}\n\n🚫 finally가 실행되지 않는 경우:\n• System.exit() 호출\n• JVM 강제 종료\n• 무한 루프나 데드락\n• 스레드가 interrupted 되고 처리되지 않은 경우\n\n🔧 주요 용도:\n• 자원 정리 (파일 닫기, 데이터베이스 연결 종료)\n• 정리 작업 (임시 파일 삭제, 로그 기록)\n\n💡 try-with-resources 권장:\n자동으로 자원을 정리해주는 try-with-resources 구문 사용 권장"
+    },
+    {
+        "category": "예외 처리",
+        "difficulty": "hard",
+        "question": "사용자 정의 예외를 만들 때 권장되는 방법은?",
+        "options": [
+            "Throwable을 직접 상속",
+            "Error를 상속",
+            "Exception 또는 RuntimeException을 상속",
+            "Object를 상속하고 Exception 인터페이스 구현"
+        ],
+        "correct": 2,
+        "explanation": "사용자 정의 예외는 Exception 또는 RuntimeException을 상속하는 것이 권장됩니다.\n\n📋 예외 계층 구조:\n• Throwable (최상위)\n  ├─ Error (시스템 레벨 오류)\n  └─ Exception\n     ├─ RuntimeException (Unchecked)\n     └─ 기타 Exception들 (Checked)\n\n✅ 권장 방법:\n1️⃣ 복구 가능한 예외 → Exception 상속:\npublic class InsufficientFundsException extends Exception {\n    public InsufficientFundsException(String message) {\n        super(message);\n    }\n}\n\n2️⃣ 프로그래밍 오류 → RuntimeException 상속:\npublic class InvalidConfigException extends RuntimeException {\n    public InvalidConfigException(String message, Throwable cause) {\n        super(message, cause);\n    }\n}\n\n🏗️ 좋은 사용자 정의 예외 설계:\n• 의미 있는 이름 사용 (xxxException)\n• 적절한 생성자 제공\n  - 기본 생성자\n  - 메시지를 받는 생성자\n  - 메시지 + 원인을 받는 생성자\n• 직렬화 고려 (serialVersionUID)\n\n🚫 피해야 할 것:\n• Throwable 직접 상속 (너무 광범위)\n• Error 상속 (시스템 레벨 오류용)\n• 너무 많은 예외 클래스 생성\n• 의미 없는 예외 변환\n\n💡 선택 기준:\n• 호출자가 처리해야 하는 예외 → Exception\n• 프로그래밍 오류나 선택적 처리 → RuntimeException"
+    }
+]

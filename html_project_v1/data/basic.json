@@ -1,0 +1,65 @@
+[
+    {
+        "category": "기초 문법",
+        "difficulty": "easy",
+        "question": "자바에서 main 메서드의 올바른 시그니처는?",
+        "options": [
+            "public static void main(String[] args)",
+            "public void main(String[] args)",
+            "static void main(String args)",
+            "public main(String[] args)"
+        ],
+        "correct": 0,
+        "explanation": "main 메서드는 반드시 public static void main(String[] args) 형태여야 합니다.\n\n📋 각 키워드의 의미:\n• public: JVM이 어디서든 접근할 수 있도록 함\n• static: 클래스 인스턴스 생성 없이 호출 가능\n• void: 반환값이 없음을 의미\n• String[] args: 명령행 인수를 받는 매개변수\n\n💡 면접 팁: JVM이 프로그램 실행 시 가장 먼저 찾는 메서드가 바로 main 메서드입니다."
+    },
+    {
+        "category": "기초 문법",
+        "difficulty": "easy",
+        "question": "자바에서 변수 선언 시 사용하는 키워드가 아닌 것은?",
+        "options": ["int", "String", "boolean", "var"],
+        "correct": 3,
+        "explanation": "var는 자바 10부터 도입된 지역 변수 타입 추론(Local Variable Type Inference) 키워드입니다.\n\n📋 각 옵션 설명:\n• int: 정수형 기본 타입 (primitive type)\n• String: 문자열 클래스 (reference type)\n• boolean: 불린형 기본 타입 (true/false)\n• var: 컴파일러가 타입을 추론하는 키워드\n\n💡 var 사용 예시: var name = \"Java\"; // String으로 추론\n🚫 주의: var는 지역변수에만 사용 가능, 필드나 매개변수에는 불가"
+    },
+    {
+        "category": "기초 문법",
+        "difficulty": "easy",
+        "question": "자바의 기본 타입(primitive type)이 아닌 것은?",
+        "options": ["int", "double", "String", "boolean"],
+        "correct": 2,
+        "explanation": "String은 기본 타입이 아닌 참조 타입(reference type)입니다.\n\n📋 자바의 8가지 기본 타입:\n• 정수형: byte(1), short(2), int(4), long(8)\n• 실수형: float(4), double(8)\n• 문자형: char(2)\n• 불린형: boolean(1)\n\n💡 면접 포인트:\n• 기본 타입은 스택 메모리에 값이 직접 저장\n• 참조 타입은 힙 메모리의 객체를 가리키는 주소 저장\n• String은 객체이므로 new 연산자로 생성 가능"
+    },
+    {
+        "category": "기초 문법",
+        "difficulty": "medium",
+        "question": "다음 중 자바의 접근 제어자가 아닌 것은?",
+        "options": ["public", "protected", "private", "internal"],
+        "correct": 3,
+        "explanation": "internal은 C#의 접근 제어자로, 자바에는 존재하지 않습니다.\n\n📋 자바의 4가지 접근 제어자:\n• public: 모든 클래스에서 접근 가능\n• protected: 같은 패키지 + 상속받은 클래스에서 접근 가능\n• default(생략): 같은 패키지 내에서만 접근 가능\n• private: 같은 클래스 내에서만 접근 가능\n\n💡 접근 범위 (넓음 → 좁음):\npublic > protected > default > private\n\n🎯 면접 팁: 캡슐화 원칙에 따라 가능한 한 좁은 범위의 접근 제어자 사용을 권장"
+    },
+    {
+        "category": "기초 문법",
+        "difficulty": "medium",
+        "question": "자바에서 == 연산자와 equals() 메서드의 차이점은?",
+        "options": [
+            "== 는 값 비교, equals()는 참조 비교",
+            "== 는 참조 비교, equals()는 값 비교",
+            "둘 다 값 비교를 수행",
+            "둘 다 참조 비교를 수행"
+        ],
+        "correct": 1,
+        "explanation": "== 연산자는 참조(주소) 비교를, equals() 메서드는 값(내용) 비교를 수행합니다.\n\n📋 상세 비교:\n• == 연산자:\n  - 기본 타입: 값 자체를 비교\n  - 참조 타입: 객체의 주소를 비교\n\n• equals() 메서드:\n  - Object 클래스에 정의된 메서드\n  - 기본적으로 == 와 동일하게 동작\n  - String, Integer 등에서 오버라이드하여 값 비교로 구현\n\n💡 예시:\nString s1 = new String(\"hello\");\nString s2 = new String(\"hello\");\ns1 == s2;        // false (서로 다른 객체)\ns1.equals(s2);   // true (같은 내용)\n\n🚨 주의: equals() 사용 시 NullPointerException 방지 필요"
+    },
+    {
+        "category": "기초 문법",
+        "difficulty": "hard",
+        "question": "자바에서 String Pool의 동작 원리는?",
+        "options": [
+            "힙 메모리에 문자열을 중복 저장",
+            "스택 메모리에 문자열을 저장",
+            "동일한 문자열 리터럴을 하나의 객체로 관리",
+            "문자열을 자동으로 가비지 컬렉션"
+        ],
+        "correct": 2,
+        "explanation": "String Pool은 힙 메모리 내에서 동일한 문자열 리터럴을 하나의 객체로 관리하는 메커니즘입니다.\n\n📋 String Pool 동작 원리:\n1. 문자열 리터럴 생성 시 Pool에서 동일한 값 확인\n2. 존재하면 기존 객체 참조 반환\n3. 없으면 새 객체 생성 후 Pool에 추가\n\n💡 예시:\nString s1 = \"Hello\";     // Pool에 새로 생성\nString s2 = \"Hello\";     // Pool의 기존 객체 참조\nString s3 = new String(\"Hello\"); // 새로운 객체 생성\n\ns1 == s2;  // true (같은 객체 참조)\ns1 == s3;  // false (다른 객체)\n\n🔧 intern() 메서드:\nString s4 = s3.intern(); // s3를 Pool에 추가하고 참조 반환\ns1 == s4;  // true\n\n🎯 성능상 이점: 메모리 사용량 감소, 문자열 비교 성능 향상"
+    }
+]
