@@ -1,0 +1,41 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  # - "first_rules.yml"
+  # - "second_rules.yml"
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'airflow-webserver'
+    static_configs:
+      - targets: ['airflow-webserver:8080']
+    scrape_interval: 30s
+    metrics_path: '/admin/metrics'
+    basic_auth:
+      username: 'admin'
+      password: 'admin'
+
+  - job_name: 'airflow-scheduler'
+    static_configs:
+      - targets: ['airflow-scheduler:8974']
+    scrape_interval: 30s
+
+  - job_name: 'postgres'
+    static_configs:
+      - targets: ['postgres:5432']
+    scrape_interval: 30s
+
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['redis:6379']
+    scrape_interval: 30s
+
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: ['node-exporter:9100']
+    scrape_interval: 30s
