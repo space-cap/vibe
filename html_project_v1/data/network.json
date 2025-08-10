@@ -1,0 +1,67 @@
+[
+    {
+        "category": "네트워크",
+        "difficulty": "medium",
+        "question": "HTTP와 HTTPS의 주요 차이점은?",
+        "options": [
+            "포트 번호만 다름",
+            "HTTPS는 SSL/TLS로 암호화됨",
+            "HTTP는 더 빠름",
+            "HTTPS는 GET만 지원"
+        ],
+        "correct": 1,
+        "explanation": "HTTPS는 HTTP에 SSL/TLS 암호화 계층을 추가하여 데이터 전송 보안을 제공합니다.\n\n📋 HTTP vs HTTPS 비교:\n\n🔓 HTTP (HyperText Transfer Protocol):\n• 평문으로 데이터 전송\n• 기본 포트: 80\n• 빠른 전송 속도\n• 보안 취약 (도청, 변조 가능)\n• 단순한 구조\n\n🔒 HTTPS (HTTP Secure):\n• SSL/TLS로 암호화된 데이터 전송\n• 기본 포트: 443\n• 약간의 성능 오버헤드\n• 높은 보안성 (기밀성, 무결성, 인증)\n• 인증서 필요\n\n🔐 SSL/TLS의 주요 기능:\n\n1️⃣ 암호화 (Encryption):\n• 대칭키 + 비대칭키 조합 사용\n• 데이터 도청 방지\n• AES, ChaCha20 등 강력한 암호화\n\n2️⃣ 인증 (Authentication):\n• 서버 신원 확인\n• 디지털 인증서 사용\n• CA(Certificate Authority) 검증\n\n3️⃣ 무결성 (Integrity):\n• 데이터 변조 탐지\n• 해시 함수 사용 (SHA-256)\n• 메시지 인증 코드 (MAC)\n\n🚀 HTTPS 핸드셰이크 과정:\n1. Client Hello (지원 암호화 방식 전송)\n2. Server Hello (인증서 + 암호화 방식 선택)\n3. 인증서 검증\n4. 키 교환 (Diffie-Hellman, RSA)\n5. 암호화 통신 시작\n\n⚡ 성능 고려사항:\n• 초기 핸드셰이크 오버헤드\n• CPU 암호화/복호화 부담\n• HTTP/2, TLS 1.3으로 성능 개선\n• CDN, 하드웨어 가속으로 최적화\n\n🎯 현재 트렌드:\n• 모든 웹사이트 HTTPS 권장\n• 브라우저의 HTTP 경고 표시\n• SEO 검색 순위에도 영향\n• Let's Encrypt로 무료 인증서 제공\n\n💡 실무 팁:\n• HSTS (HTTP Strict Transport Security) 설정\n• Mixed Content 문제 해결\n• 인증서 자동 갱신 설정"
+    },
+    {
+        "category": "네트워크",
+        "difficulty": "easy",
+        "question": "RESTful API에서 HTTP GET 메서드의 주요 특징은?",
+        "options": [
+            "데이터 생성을 위해 사용",
+            "데이터 조회를 위해 사용되며 안전함",
+            "데이터 수정을 위해 사용",
+            "데이터 삭제를 위해 사용"
+        ],
+        "correct": 1,
+        "explanation": "GET 메서드는 서버 리소스를 조회하는 데 사용되며, 안전하고 멱등성을 가지는 특징이 있습니다.\n\n📋 HTTP GET 메서드의 특징:\n\n🔍 주요 용도:\n• 서버 리소스 조회 (Read)\n• 데이터 검색 및 읽기 전용 작업\n• 웹페이지, 이미지, 파일 등 요청\n\n✅ 안전성 (Safety):\n• 서버 상태를 변경하지 않음\n• 부작용 없는 읽기 전용 연산\n• 캐싱이 안전함\n\n🔄 멱등성 (Idempotent):\n• 동일한 요청을 여러 번 해도 결과 동일\n• 몇 번을 호출해도 서버 상태 변화 없음\n\n💡 GET 요청 예시:\n```\nGET /api/users/123 HTTP/1.1\nHost: example.com\nAccept: application/json\n```\n\n🌐 RESTful API에서 GET 사용:\n• GET /users - 사용자 목록 조회\n• GET /users/123 - 특정 사용자 조회\n• GET /users?page=1&size=10 - 페이징된 사용자 목록\n• GET /users/123/orders - 특정 사용자의 주문 목록\n\n⚠️ 제한사항:\n• URL 길이 제한 (보통 2048자)\n• 쿼리 파라미터로 데이터 전달\n• 민감한 정보는 URL에 노출 위험\n• Request Body 사용 불가 (일부 서버에서 지원하지만 권장 안함)\n\n🔧 쿼리 파라미터 활용:\n```\nGET /api/products?category=electronics&price_min=100&price_max=500&sort=price_asc\n```\n\n💾 캐싱 최적화:\n• 브라우저, CDN, 프록시에서 캐싱 가능\n• Cache-Control 헤더로 캐싱 정책 설정\n• ETag, Last-Modified로 조건부 요청 지원\n\n🆚 다른 HTTP 메서드와 비교:\n• POST: 데이터 생성 (비안전, 비멱등)\n• PUT: 데이터 수정/생성 (비안전, 멱등)\n• DELETE: 데이터 삭제 (비안전, 멱등)\n• PATCH: 부분 수정 (비안전, 비멱등)\n\n🎯 모범 사례:\n• 리소스 조회에만 사용\n• 상태 변경하는 작업은 다른 메서드 사용\n• 적절한 HTTP 상태 코드 반환 (200, 404, 403 등)\n• 페이징, 필터링, 정렬 등 쿼리 파라미터 활용"
+    },
+    {
+        "category": "네트워크",
+        "difficulty": "hard",
+        "question": "TCP와 UDP의 가장 중요한 차이점은?",
+        "options": [
+            "TCP는 빠르고 UDP는 느림",
+            "TCP는 연결지향이고 신뢰성을 보장, UDP는 비연결지향이고 신뢰성 미보장",
+            "TCP는 브로드캐스트 지원, UDP는 미지원",
+            "TCP는 암호화 지원, UDP는 미지원"
+        ],
+        "correct": 1,
+        "explanation": "TCP는 연결지향적이고 신뢰성을 보장하는 반면, UDP는 비연결지향적이고 신뢰성을 보장하지 않습니다.\n\n📋 TCP (Transmission Control Protocol):\n\n🔗 연결지향 (Connection-Oriented):\n• 3-way handshake로 연결 설정\n• 4-way handshake로 연결 해제\n• 세션 상태 관리\n\n✅ 신뢰성 보장 (Reliable):\n• 순서 보장 (Sequence Number)\n• 오류 검출 및 재전송 (ACK, NACK)\n• 흐름 제어 (Flow Control)\n• 혼잡 제어 (Congestion Control)\n\n📊 특징:\n• 패킷 순서 보장\n• 중복 패킷 제거\n• 오버헤드 큼\n• 스트림 기반 전송\n\n💡 TCP 헤더 구조 (20바이트):\n• Source/Destination Port (4바이트)\n• Sequence/Acknowledgment Number (8바이트)\n• Window Size, Checksum, Options 등\n\n📋 UDP (User Datagram Protocol):\n\n🚀 비연결지향 (Connectionless):\n• 연결 설정/해제 과정 없음\n• 각 패킷 독립적 처리\n• 상태 정보 미보관\n\n⚡ 빠른 전송:\n• 최소한의 오버헤드\n• 즉시 전송 (지연 없음)\n• 단순한 헤더 구조 (8바이트)\n\n🎯 특징:\n• 패킷 순서 보장 안함\n• 패킷 손실 가능\n• 중복 패킷 가능\n• 데이터그램 기반 전송\n\n💡 UDP 헤더 구조 (8바이트):\n• Source/Destination Port (4바이트)\n• Length, Checksum (4바이트)\n\n🔍 상세 비교:\n\n| 특성 | TCP | UDP |\n|------|-----|-----|\n| 연결 | 연결지향 | 비연결지향 |\n| 신뢰성 | 보장 | 미보장 |\n| 순서 | 보장 | 미보장 |\n| 속도 | 상대적 느림 | 빠름 |\n| 오버헤드 | 큼 | 작음 |\n| 헤더 크기 | 20바이트 | 8바이트 |\n| 용도 | 신뢰성 중요 | 속도 중요 |\n\n🎯 사용 사례:\n\n💼 TCP 사용:\n• 웹 브라우징 (HTTP/HTTPS)\n• 이메일 (SMTP, POP3, IMAP)\n• 파일 전송 (FTP)\n• 원격 접속 (SSH, Telnet)\n\n⚡ UDP 사용:\n• 실시간 스트리밍 (동영상, 음성)\n• 온라인 게임\n• DNS 질의\n• DHCP\n• 브로드캐스트/멀티캐스트\n\n🔧 최신 트렌드:\n• QUIC: UDP 기반의 새로운 전송 프로토콜\n• HTTP/3: QUIC을 사용하여 성능과 신뢰성 동시 확보\n• WebRTC: UDP 기반 실시간 통신\n\n🎯 면접 팁: 각 프로토콜의 장단점과 사용 사례를 구체적으로 설명할 수 있어야 합니다."
+    },
+    {
+        "category": "네트워크",
+        "difficulty": "medium",
+        "question": "HTTP 상태 코드 중 404의 의미는?",
+        "options": [
+            "서버 내부 오류",
+            "요청한 리소스를 찾을 수 없음",
+            "인증이 필요함",
+            "요청이 성공함"
+        ],
+        "correct": 1,
+        "explanation": "404 Not Found는 클라이언트가 요청한 리소스를 서버에서 찾을 수 없을 때 반환되는 상태 코드입니다.\n\n📋 HTTP 상태 코드 분류:\n\n1️⃣ 1xx (정보성 응답):\n• 100 Continue: 계속 진행\n• 101 Switching Protocols: 프로토콜 전환\n\n2️⃣ 2xx (성공):\n• 200 OK: 요청 성공\n• 201 Created: 리소스 생성 성공\n• 204 No Content: 성공, 응답 본문 없음\n\n3️⃣ 3xx (리다이렉션):\n• 301 Moved Permanently: 영구 이동\n• 302 Found: 임시 이동\n• 304 Not Modified: 수정되지 않음 (캐시 사용)\n\n4️⃣ 4xx (클라이언트 오류):\n• 400 Bad Request: 잘못된 요청\n• 401 Unauthorized: 인증 필요\n• 403 Forbidden: 접근 금지\n• **404 Not Found: 리소스를 찾을 수 없음**\n• 405 Method Not Allowed: 허용되지 않은 메서드\n• 429 Too Many Requests: 요청 횟수 초과\n\n5️⃣ 5xx (서버 오류):\n• 500 Internal Server Error: 서버 내부 오류\n• 502 Bad Gateway: 게이트웨이 오류\n• 503 Service Unavailable: 서비스 사용 불가\n• 504 Gateway Timeout: 게이트웨이 시간 초과\n\n🔍 404 Not Found 상세:\n\n📖 의미:\n• 요청한 URI에 해당하는 리소스가 서버에 존재하지 않음\n• 서버가 요청을 이해했지만 해당 리소스를 찾을 수 없음\n• 일시적 또는 영구적 상태일 수 있음\n\n💡 발생 원인:\n• 잘못된 URL 입력\n• 리소스가 삭제되었거나 이동됨\n• 파일명 오타\n• 경로 구조 변경\n• 권한 부족 (403과 구분하여 보안상 404 반환)\n\n🔧 404 응답 예시:\n```\nHTTP/1.1 404 Not Found\nContent-Type: text/html\nContent-Length: 1234\n\n<!DOCTYPE html>\n<html>\n<head><title>404 Not Found</title></head>\n<body><h1>페이지를 찾을 수 없습니다</h1></body>\n</html>\n```\n\n🎨 좋은 404 페이지 설계:\n• 사용자 친화적인 메시지\n• 사이트 네비게이션 제공\n• 검색 기능 포함\n• 관련 페이지 링크\n• 홈페이지로 돌아가는 링크\n\n🔍 SEO 관점:\n• 404 페이지도 검색엔진에 인덱싱됨\n• 사용자 경험 향상으로 이탈률 감소\n• Soft 404 (200 코드로 \"페이지 없음\" 내용) 지양\n\n⚙️ 서버 로그 활용:\n• 404 에러 패턴 분석\n• 깨진 링크(Broken Link) 탐지\n• 리다이렉션 규칙 설정\n• 웹사이트 구조 개선\n\n🎯 개발 팁:\n• REST API에서도 적절한 404 응답 설계\n• 모니터링 시스템에서 404 에러율 추적\n• 로그 분석으로 사용자 행동 패턴 파악"
+    },
+    {
+        "category": "네트워크",
+        "difficulty": "hard",
+        "question": "CORS(Cross-Origin Resource Sharing)가 필요한 이유는?",
+        "options": [
+            "서버 성능 향상을 위해",
+            "브라우저의 동일 출처 정책으로 인한 제약을 해결하기 위해",
+            "데이터 암호화를 위해",
+            "캐싱 최적화를 위해"
+        ],
+        "correct": 1,
+        "explanation": "CORS는 브라우저의 동일 출처 정책(Same-Origin Policy)으로 인해 다른 도메인의 리소스에 접근할 수 없는 제약을 해결하기 위한 메커니즘입니다.\n\n📋 동일 출처 정책 (Same-Origin Policy):\n\n🔒 보안 메커니즘:\n• 웹 브라우저가 구현하는 중요한 보안 정책\n• 한 출처(Origin)에서 로드된 문서나 스크립트가 다른 출처의 리소스와 상호작용하는 것을 제한\n• XSS, CSRF 등 보안 공격 방지\n\n🌐 출처 (Origin) 구성 요소:\n• **프로토콜** (http vs https)\n• **도메인** (example.com vs api.example.com)\n• **포트** (80 vs 8080)\n\n💡 동일 출처 예시:\n```\n현재 페이지: https://example.com:443/page\n\n✅ 같은 출처:\nhttps://example.com/api/data\nhttps://example.com:443/other\n\n❌ 다른 출처:\nhttp://example.com (프로토콜 다름)\nhttps://api.example.com (서브도메인 다름)\nhttps://example.com:8080 (포트 다름)\nhttps://other.com (도메인 다름)\n```\n\n📋 CORS (Cross-Origin Resource Sharing):\n\n🔧 동작 원리:\n• 서버가 HTTP 헤더를 통해 다른 출처의 접근을 명시적으로 허용\n• 브라우저가 실제 요청 전에 사전 요청(Preflight Request) 전송\n• 서버 응답을 확인 후 실제 요청 허용/거부 결정\n\n🚀 CORS 요청 유형:\n\n1️⃣ 단순 요청 (Simple Request):\n• GET, HEAD, POST 메서드\n• 특정 헤더만 허용 (Content-Type: application/x-www-form-urlencoded, multipart/form-data, text/plain)\n• 사전 요청 없이 바로 실행\n\n2️⃣ 사전 요청 (Preflight Request):\n• OPTIONS 메서드로 먼저 요청\n• 실제 요청 전에 서버 허용 여부 확인\n• PUT, DELETE 등 복잡한 요청에 적용\n\n💡 사전 요청 예시:\n```\n// 브라우저가 자동으로 보내는 사전 요청\nOPTIONS /api/users HTTP/1.1\nOrigin: https://frontend.example.com\nAccess-Control-Request-Method: POST\nAccess-Control-Request-Headers: Content-Type\n\n// 서버 응답\nHTTP/1.1 200 OK\nAccess-Control-Allow-Origin: https://frontend.example.com\nAccess-Control-Allow-Methods: GET, POST, PUT, DELETE\nAccess-Control-Allow-Headers: Content-Type, Authorization\nAccess-Control-Max-Age: 86400\n```\n\n🔧 주요 CORS 헤더:\n\n**서버 → 브라우저:**\n• `Access-Control-Allow-Origin`: 허용된 출처\n• `Access-Control-Allow-Methods`: 허용된 HTTP 메서드\n• `Access-Control-Allow-Headers`: 허용된 헤더\n• `Access-Control-Allow-Credentials`: 쿠키/인증 정보 허용\n• `Access-Control-Max-Age`: 사전 요청 캐시 시간\n\n**브라우저 → 서버:**\n• `Origin`: 요청하는 출처\n• `Access-Control-Request-Method`: 실제 사용할 메서드\n• `Access-Control-Request-Headers`: 실제 사용할 헤더\n\n🛠️ 서버 측 CORS 설정 예시:\n\n```java\n// Spring Boot\n@CrossOrigin(origins = \"https://frontend.example.com\")\n@RestController\npublic class ApiController {\n    // ...\n}\n\n// 또는 전역 설정\n@Configuration\npublic class CorsConfig {\n    @Bean\n    public CorsConfigurationSource corsConfigurationSource() {\n        CorsConfiguration configuration = new CorsConfiguration();\n        configuration.setAllowedOriginPatterns(Arrays.asList(\"https://*.example.com\"));\n        configuration.setAllowedMethods(Arrays.asList(\"GET\", \"POST\", \"PUT\", \"DELETE\"));\n        configuration.setAllowedHeaders(Arrays.asList(\"*\"));\n        configuration.setAllowCredentials(true);\n        \n        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();\n        source.registerCorsConfiguration(\"/api/**\", configuration);\n        return source;\n    }\n}\n```\n\n⚠️ 보안 고려사항:\n• `Access-Control-Allow-Origin: *` 는 인증 정보와 함께 사용 불가\n• 가능한 구체적인 도메인 명시\n• 필요한 메서드와 헤더만 허용\n• 정기적인 CORS 설정 검토\n\n🔧 개발 시 해결 방법:\n• 개발 서버에서 프록시 설정\n• 브라우저 CORS 비활성화 (개발 시에만)\n• 서버 측 CORS 미들웨어 사용\n\n🎯 실무 시나리오:\n• SPA(React, Vue) + REST API 구조\n• 마이크로서비스 간 통신\n• CDN에서 폰트, 이미지 로딩\n• 외부 API 호출\n\n💡 면접 팁: CORS 에러 경험과 해결 과정, 보안 영향도 함께 설명하면 좋습니다."
+    }
+]

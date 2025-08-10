@@ -61,5 +61,44 @@
         ],
         "correct": 2,
         "explanation": "String Pool은 힙 메모리 내에서 동일한 문자열 리터럴을 하나의 객체로 관리하는 메커니즘입니다.\n\n📋 String Pool 동작 원리:\n1. 문자열 리터럴 생성 시 Pool에서 동일한 값 확인\n2. 존재하면 기존 객체 참조 반환\n3. 없으면 새 객체 생성 후 Pool에 추가\n\n💡 예시:\nString s1 = \"Hello\";     // Pool에 새로 생성\nString s2 = \"Hello\";     // Pool의 기존 객체 참조\nString s3 = new String(\"Hello\"); // 새로운 객체 생성\n\ns1 == s2;  // true (같은 객체 참조)\ns1 == s3;  // false (다른 객체)\n\n🔧 intern() 메서드:\nString s4 = s3.intern(); // s3를 Pool에 추가하고 참조 반환\ns1 == s4;  // true\n\n🎯 성능상 이점: 메모리 사용량 감소, 문자열 비교 성능 향상"
+    },
+    {
+        "category": "기초 문법",
+        "difficulty": "medium",
+        "question": "자바에서 static 키워드의 용도가 아닌 것은?",
+        "options": [
+            "클래스 변수 선언",
+            "클래스 메서드 선언",
+            "인스턴스 변수 초기화",
+            "초기화 블록 선언"
+        ],
+        "correct": 2,
+        "explanation": "static은 인스턴스 변수 초기화와는 관련이 없습니다. static은 클래스 레벨의 멤버를 정의할 때 사용됩니다.\n\n📋 static 키워드의 용도:\n\n🏷️ 클래스 변수 (Static Variable):\n• 모든 인스턴스가 공유하는 변수\n• 클래스가 로드될 때 메모리에 할당\n• 인스턴스 생성 없이 접근 가능\n\npublic class Counter {\n    private static int count = 0; // 클래스 변수\n}\n\n⚙️ 클래스 메서드 (Static Method):\n• 인스턴스 생성 없이 호출 가능\n• 인스턴스 변수나 메서드에 직접 접근 불가\n• 유틸리티 메서드로 많이 사용\n\npublic static int add(int a, int b) {\n    return a + b;\n}\n\n🏗️ 초기화 블록 (Static Block):\n• 클래스가 처음 로드될 때 한 번만 실행\n• static 변수 초기화에 사용\n\nstatic {\n    // 복잡한 초기화 로직\n    count = loadInitialCount();\n}\n\n📚 내부 클래스 (Static Nested Class):\n• 외부 클래스의 인스턴스 없이 생성 가능\n• 외부 클래스의 인스턴스 변수에 접근 불가\n\n💡 주요 특징:\n• 클래스 로딩 시 메모리 할당\n• 프로그램 종료 시까지 메모리 유지\n• 모든 인스턴스가 공유\n• 인스턴스 컨텍스트 없이 실행\n\n🚫 주의사항:\n• static 메서드에서 인스턴스 변수/메서드 직접 접근 불가\n• this, super 키워드 사용 불가\n• 메모리 누수 위험 (Garbage Collection 대상 아님)\n\n🎯 면접 팁: static의 메모리 구조와 생명주기도 함께 설명하면 좋습니다."
+    },
+    {
+        "category": "기초 문법",
+        "difficulty": "easy",
+        "question": "자바에서 상수를 선언하는 올바른 방법은?",
+        "options": [
+            "const int MAX_SIZE = 100;",
+            "final int MAX_SIZE = 100;",
+            "static int MAX_SIZE = 100;",
+            "readonly int MAX_SIZE = 100;"
+        ],
+        "correct": 1,
+        "explanation": "자바에서는 final 키워드를 사용하여 상수를 선언합니다.\n\n📋 자바의 상수 선언:\n\n🔒 final 키워드:\n• 변수를 상수로 만드는 키워드\n• 한 번 초기화 후 값 변경 불가\n• 컴파일 타임 또는 런타임에 초기화 가능\n\n💡 상수 선언 방법:\n\n1️⃣ 기본 상수:\nfinal int MAX_SIZE = 100;\n\n2️⃣ 클래스 상수 (권장):\npublic static final int MAX_SIZE = 100;\n\n3️⃣ 런타임 상수:\nfinal int currentTime = getCurrentTime();\n\n📝 네이밍 컨벤션:\n• 모든 글자 대문자\n• 단어 간 언더스코어(_) 사용\n• public static final int MAX_RETRY_COUNT = 3;\n\n🆚 다른 언어와 비교:\n• C/C++: const 키워드\n• C#: const, readonly 키워드\n• JavaScript: const 키워드\n• Java: final 키워드만 존재\n\n🔧 실제 사용 예시:\npublic class Constants {\n    public static final String APP_NAME = \"MyApp\";\n    public static final int DEFAULT_TIMEOUT = 30000;\n    public static final double PI = 3.14159;\n}\n\n💡 컴파일 타임 상수:\n• 기본 타입과 String만 가능\n• 컴파일 시점에 값이 인라인으로 치환\n• static final이면서 컴파일 타임에 값이 결정되어야 함\n\n🎯 실무 팁:\n• 매직 넘버 대신 명명된 상수 사용\n• 관련 상수들은 enum이나 인터페이스로 그룹화\n• 설정값이나 한계값을 상수로 정의하여 유지보수성 향상"
+    },
+    {
+        "category": "기초 문법",
+        "difficulty": "hard",
+        "question": "자바의 autoboxing과 unboxing에 대한 설명으로 올바른 것은?",
+        "options": [
+            "기본 타입과 참조 타입 간의 자동 변환",
+            "배열의 자동 크기 조정",
+            "문자열의 자동 연결",
+            "메모리의 자동 할당"
+        ],
+        "correct": 0,
+        "explanation": "Autoboxing과 Unboxing은 기본 타입(primitive type)과 래퍼 클래스(wrapper class) 간의 자동 변환 기능입니다.\n\n📋 Boxing과 Unboxing:\n\n📦 Boxing (박싱):\n• 기본 타입 → 래퍼 클래스 변환\n• 수동 박싱: Integer obj = new Integer(10);\n• 자동 박싱: Integer obj = 10; // 컴파일러가 자동 변환\n\n📤 Unboxing (언박싱):\n• 래퍼 클래스 → 기본 타입 변환\n• 수동 언박싱: int value = obj.intValue();\n• 자동 언박싱: int value = obj; // 컴파일러가 자동 변환\n\n🔧 기본 타입과 래퍼 클래스 매핑:\n• byte ↔ Byte\n• short ↔ Short\n• int ↔ Integer\n• long ↔ Long\n• float ↔ Float\n• double ↔ Double\n• char ↔ Character\n• boolean ↔ Boolean\n\n💡 자동 변환 예시:\n\n// Autoboxing\nList<Integer> list = new ArrayList<>();\nlist.add(10); // int → Integer 자동 변환\n\n// Unboxing\nInteger obj = 20;\nint value = obj; // Integer → int 자동 변환\n\n// 혼합 사용\nInteger a = 10;\nInteger b = 20;\nInteger c = a + b; // 언박싱 → 연산 → 박싱\n\n⚠️ 주의사항:\n\n1️⃣ 성능 오버헤드:\n• 객체 생성/소멸 비용\n• 메모리 사용량 증가\n• 빈번한 박싱/언박싱은 성능 저하\n\n2️⃣ NullPointerException 위험:\nInteger obj = null;\nint value = obj; // NPE 발생!\n\n3️⃣ 동등성 비교 주의:\nInteger a = 128;\nInteger b = 128;\nSystem.out.println(a == b); // false (새로운 객체)\n\nInteger x = 127;\nInteger y = 127;\nSystem.out.println(x == y); // true (캐시된 객체)\n\n🏪 Integer 캐싱:\n• -128 ~ 127 범위의 Integer는 캐싱됨\n• 같은 값은 동일한 객체 참조\n• 범위 밖은 새로운 객체 생성\n\n💡 컴파일러 변환 과정:\n\n// 소스 코드\nInteger obj = 10;\nint value = obj;\n\n// 컴파일러가 변환한 코드\nInteger obj = Integer.valueOf(10);\nint value = obj.intValue();\n\n🎯 실무 팁:\n• 성능이 중요한 곳에서는 기본 타입 사용\n• 컬렉션 사용 시는 래퍼 클래스 필수\n• null 체크 로직 고려\n• equals() 메서드 사용 권장 (== 대신)\n\n🔍 면접 포인트: 박싱/언박싱의 성능 영향과 캐싱 메커니즘을 함께 설명"
     }
 ]

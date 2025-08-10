@@ -1,0 +1,67 @@
+[
+    {
+        "category": "디자인 패턴",
+        "difficulty": "medium",
+        "question": "싱글톤 패턴의 주요 목적은?",
+        "options": [
+            "객체 생성 비용 절약",
+            "클래스의 인스턴스가 오직 하나만 존재하도록 보장",
+            "다형성 구현",
+            "메모리 누수 방지"
+        ],
+        "correct": 1,
+        "explanation": "싱글톤 패턴은 클래스의 인스턴스가 애플리케이션 전체에서 오직 하나만 존재하도록 보장하는 패턴입니다.\n\n📋 싱글톤 패턴의 특징:\n• 클래스의 인스턴스가 단 하나만 존재\n• 전역적인 접근점 제공\n• 인스턴스의 지연 생성 (Lazy Initialization) 가능\n• 메모리 절약 효과\n\n🔧 구현 방법들:\n\n1️⃣ 이른 초기화 (Eager Initialization):\npublic class Singleton {\n    private static final Singleton instance = new Singleton();\n    private Singleton() {}\n    public static Singleton getInstance() {\n        return instance;\n    }\n}\n\n2️⃣ 지연 초기화 (Lazy Initialization):\npublic class Singleton {\n    private static Singleton instance;\n    private Singleton() {}\n    public static Singleton getInstance() {\n        if (instance == null) {\n            instance = new Singleton();\n        }\n        return instance;\n    }\n}\n\n3️⃣ 스레드 안전 (Thread-Safe):\npublic class Singleton {\n    private static volatile Singleton instance;\n    private Singleton() {}\n    public static Singleton getInstance() {\n        if (instance == null) {\n            synchronized (Singleton.class) {\n                if (instance == null) {\n                    instance = new Singleton();\n                }\n            }\n        }\n        return instance;\n    }\n}\n\n4️⃣ Enum 방식 (권장):\npublic enum Singleton {\n    INSTANCE;\n    public void doSomething() { ... }\n}\n\n💡 사용 사례:\n• 로거, 설정 관리자, 캐시\n• 데이터베이스 연결 풀\n• 스레드 풀\n\n⚠️ 주의사항:\n• 테스트의 어려움\n• 의존성 주입과의 충돌\n• 멀티스레드 환경에서의 동기화 문제\n\n🎯 면접 팁: 다양한 구현 방법과 각각의 장단점을 설명할 수 있어야 합니다."
+    },
+    {
+        "category": "디자인 패턴",
+        "difficulty": "hard",
+        "question": "옵저버 패턴의 핵심 구성 요소가 아닌 것은?",
+        "options": [
+            "Subject (Observable)",
+            "Observer",
+            "ConcreteObserver",
+            "Factory"
+        ],
+        "correct": 3,
+        "explanation": "옵저버 패턴은 Subject, Observer, ConcreteSubject, ConcreteObserver로 구성되며, Factory는 포함되지 않습니다.\n\n📋 옵저버 패턴의 구성 요소:\n\n🎯 Subject (Observable):\n• Observer들을 관리하는 인터페이스\n• Observer 등록/제거/알림 메서드 정의\n• 상태 변경 시 Observer들에게 통지\n\n👁️ Observer:\n• 알림을 받을 객체들의 인터페이스\n• update() 메서드로 통지 받음\n\n🏢 ConcreteSubject:\n• Subject 인터페이스 구현\n• 실제 상태를 가지고 있음\n• 상태 변경 시 Observer들에게 알림\n\n👥 ConcreteObserver:\n• Observer 인터페이스 구현\n• Subject로부터 알림을 받아 적절한 처리\n\n💡 구현 예시:\n// Subject 인터페이스\ninterface Subject {\n    void registerObserver(Observer o);\n    void removeObserver(Observer o);\n    void notifyObservers();\n}\n\n// Observer 인터페이스\ninterface Observer {\n    void update(String message);\n}\n\n// ConcreteSubject\npublic class NewsAgency implements Subject {\n    private List<Observer> observers = new ArrayList<>();\n    private String news;\n    \n    public void setNews(String news) {\n        this.news = news;\n        notifyObservers();\n    }\n    \n    @Override\n    public void notifyObservers() {\n        for (Observer observer : observers) {\n            observer.update(news);\n        }\n    }\n}\n\n// ConcreteObserver\npublic class NewsChannel implements Observer {\n    @Override\n    public void update(String news) {\n        System.out.println(\"News received: \" + news);\n    }\n}\n\n🎯 장점:\n• 느슨한 결합 (Loose Coupling)\n• 동적인 관계 설정\n• 브로드캐스트 통신\n\n⚠️ 단점:\n• 메모리 누수 위험 (Observer 제거 안함)\n• 복잡한 의존성 그래프\n• 예상치 못한 업데이트\n\n💡 실제 사용 예:\n• Java의 Observable/Observer (Deprecated)\n• Spring의 ApplicationEvent\n• GUI 이벤트 시스템\n• MVC 패턴의 Model-View 관계"
+    },
+    {
+        "category": "디자인 패턴",
+        "difficulty": "easy",
+        "question": "팩토리 메서드 패턴의 주요 목적은?",
+        "options": [
+            "객체 생성 로직을 캡슐화",
+            "싱글톤 객체 관리",
+            "상속 관계 설정",
+            "예외 처리 자동화"
+        ],
+        "correct": 0,
+        "explanation": "팩토리 메서드 패턴은 객체 생성 로직을 캡슐화하여 클라이언트 코드와 구체적인 클래스 간의 결합도를 낮춥니다.\n\n📋 팩토리 메서드 패턴의 목적:\n• 객체 생성 로직을 별도 메서드로 분리\n• 구체적인 클래스에 의존하지 않는 객체 생성\n• 생성할 객체의 타입을 서브클래스가 결정\n• 확장성과 유연성 제공\n\n💡 구현 예시:\n\n// Product 인터페이스\ninterface Animal {\n    void sound();\n}\n\n// ConcreteProduct들\nclass Dog implements Animal {\n    public void sound() { System.out.println(\"멍멍!\"); }\n}\n\nclass Cat implements Animal {\n    public void sound() { System.out.println(\"야옹!\"); }\n}\n\n// Creator (팩토리)\nabstract class AnimalFactory {\n    // 팩토리 메서드\n    public abstract Animal createAnimal();\n    \n    // 비즈니스 로직\n    public void playWithAnimal() {\n        Animal animal = createAnimal();\n        animal.sound();\n    }\n}\n\n// ConcreteCreator들\nclass DogFactory extends AnimalFactory {\n    public Animal createAnimal() {\n        return new Dog();\n    }\n}\n\nclass CatFactory extends AnimalFactory {\n    public Animal createAnimal() {\n        return new Cat();\n    }\n}\n\n🎯 장점:\n• 객체 생성과 사용의 분리\n• 새로운 제품 추가 시 기존 코드 변경 없음\n• 단일 책임 원칙 준수\n• 개방-폐쇄 원칙 준수\n\n⚠️ 단점:\n• 클래스 개수 증가\n• 복잡성 증가\n\n🔧 실제 사용 예:\n• JDBC의 Connection 생성\n• Spring의 BeanFactory\n• Collections.unmodifiableList()\n\n🆚 다른 팩토리 패턴과 비교:\n• 팩토리 메서드: 상속 기반, 하나의 제품군\n• 추상 팩토리: 구성 기반, 여러 제품군\n• 단순 팩토리: 정적 메서드, 패턴이 아님"
+    },
+    {
+        "category": "디자인 패턴",
+        "difficulty": "medium",
+        "question": "전략 패턴(Strategy Pattern)에서 Context의 역할은?",
+        "options": [
+            "구체적인 알고리즘 구현",
+            "전략 객체를 사용하여 작업을 위임",
+            "전략 객체 생성",
+            "전략 변경 시점 결정"
+        ],
+        "correct": 1,
+        "explanation": "Context는 전략 패턴에서 Strategy 객체를 참조하고, 실제 작업을 Strategy에게 위임하는 역할을 합니다.\n\n📋 전략 패턴의 구성 요소:\n\n🎯 Strategy (전략 인터페이스):\n• 모든 구체적 전략이 구현해야 할 인터페이스\n• 알고리즘의 공통된 연산을 정의\n\n🔧 ConcreteStrategy (구체적 전략):\n• Strategy 인터페이스를 구현\n• 실제 알고리즘 로직 포함\n\n🏢 Context (컨텍스트):\n• Strategy 객체에 대한 참조를 유지\n• 클라이언트의 요청을 Strategy에게 위임\n• 런타임에 전략 변경 가능\n\n💡 구현 예시:\n\n// Strategy 인터페이스\ninterface PaymentStrategy {\n    void pay(int amount);\n}\n\n// ConcreteStrategy들\nclass CreditCardPayment implements PaymentStrategy {\n    public void pay(int amount) {\n        System.out.println(\"신용카드로 \" + amount + \"원 결제\");\n    }\n}\n\nclass KakaoPayPayment implements PaymentStrategy {\n    public void pay(int amount) {\n        System.out.println(\"카카오페이로 \" + amount + \"원 결제\");\n    }\n}\n\n// Context\nclass ShoppingCart {\n    private PaymentStrategy paymentStrategy;\n    \n    public void setPaymentStrategy(PaymentStrategy strategy) {\n        this.paymentStrategy = strategy;\n    }\n    \n    public void checkout(int amount) {\n        // 전략에게 작업 위임\n        paymentStrategy.pay(amount);\n    }\n}\n\n// 사용 예시\nShoppingCart cart = new ShoppingCart();\ncart.setPaymentStrategy(new CreditCardPayment());\ncart.checkout(10000);\n\ncart.setPaymentStrategy(new KakaoPayPayment());\ncart.checkout(5000);\n\n🎯 장점:\n• 런타임에 알고리즘 변경 가능\n• 알고리즘과 클라이언트 코드 분리\n• 새로운 전략 추가 시 기존 코드 변경 없음\n• 조건문(if-else, switch) 제거\n\n⚠️ 단점:\n• 클라이언트가 구체적 전략들을 알아야 함\n• 객체 수 증가\n• 전략이 많지 않으면 오버엔지니어링\n\n💡 실제 사용 예:\n• Collections.sort()의 Comparator\n• Spring Security의 AuthenticationProvider\n• 파일 압축 알고리즘 선택\n• 정렬 알고리즘 선택"
+    },
+    {
+        "category": "디자인 패턴",
+        "difficulty": "hard",
+        "question": "데코레이터 패턴과 프록시 패턴의 주요 차이점은?",
+        "options": [
+            "데코레이터는 기능 추가, 프록시는 접근 제어",
+            "데코레이터는 접근 제어, 프록시는 기능 추가",
+            "둘 다 기능 추가가 목적",
+            "둘 다 접근 제어가 목적"
+        ],
+        "correct": 0,
+        "explanation": "데코레이터 패턴은 객체에 동적으로 기능을 추가하는 것이 목적이고, 프록시 패턴은 객체에 대한 접근을 제어하는 것이 목적입니다.\n\n📋 데코레이터 패턴:\n🎯 목적: 객체에 동적으로 새로운 기능(책임) 추가\n• 상속 없이 객체 기능 확장\n• 여러 데코레이터 조합 가능\n• 런타임에 기능 추가/제거\n\n💡 구현 예시 - 커피 주문:\ninterface Coffee {\n    String getDescription();\n    double getCost();\n}\n\nclass SimpleCoffee implements Coffee {\n    public String getDescription() { return \"Simple Coffee\"; }\n    public double getCost() { return 2.0; }\n}\n\nabstract class CoffeeDecorator implements Coffee {\n    protected Coffee coffee;\n    public CoffeeDecorator(Coffee coffee) { this.coffee = coffee; }\n}\n\nclass MilkDecorator extends CoffeeDecorator {\n    public MilkDecorator(Coffee coffee) { super(coffee); }\n    public String getDescription() { return coffee.getDescription() + \", Milk\"; }\n    public double getCost() { return coffee.getCost() + 0.5; }\n}\n\n// 사용: new MilkDecorator(new SimpleCoffee())\n\n📋 프록시 패턴:\n🎯 목적: 다른 객체에 대한 접근을 제어\n• 지연 로딩 (Virtual Proxy)\n• 접근 권한 검사 (Protection Proxy)\n• 캐싱 (Cache Proxy)\n• 로깅, 모니터링 (Logging Proxy)\n\n💡 구현 예시 - 이미지 로딩:\ninterface Image {\n    void display();\n}\n\nclass RealImage implements Image {\n    private String filename;\n    public RealImage(String filename) {\n        this.filename = filename;\n        loadFromDisk(); // 비용이 큰 작업\n    }\n    public void display() { System.out.println(\"Displaying \" + filename); }\n}\n\nclass ProxyImage implements Image {\n    private RealImage realImage;\n    private String filename;\n    \n    public ProxyImage(String filename) { this.filename = filename; }\n    \n    public void display() {\n        if (realImage == null) {\n            realImage = new RealImage(filename); // 지연 로딩\n        }\n        realImage.display();\n    }\n}\n\n🔍 주요 차이점:\n\n| 구분 | 데코레이터 패턴 | 프록시 패턴 |\n|------|----------------|-------------|\n| 목적 | 기능 추가/확장 | 접근 제어 |\n| 관계 | 여러 데코레이터 조합 | 일대일 대리 관계 |\n| 시점 | 런타임 동적 조합 | 컴파일 타임 고정 |\n| 용도 | 기능 향상 | 성능, 보안, 접근성 |\n\n💡 실제 사용 예:\n• 데코레이터: Java IO (BufferedReader, FileReader)\n• 프록시: Spring AOP, JPA 지연 로딩, RMI\n\n🎯 면접 팁: 두 패턴 모두 동일한 인터페이스를 구현하지만 목적과 사용법이 다름을 강조"
+    }
+]

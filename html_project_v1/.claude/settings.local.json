@@ -7,7 +7,9 @@
       "Bash(git push:*)",
       "Bash(gh repo create:*)",
       "Bash(git init:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(git remote add:*)",
+      "Bash(git branch:*)"
     ],
     "deny": []
   }
